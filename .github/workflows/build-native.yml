@@ -64,26 +64,23 @@ jobs:
           w "$(& $conan --version 2>&1)"
 
       - name: git probe
-        shell: pwsh
+        shell: cmd
         run: |
-          $log = 'diagnostics/git.log'
-          function w($m) { "$((Get-Date).ToString('HH:mm:ss')) $m" | Add-Content $log }
-          w "$(& git --version 2>&1)"
-          & git ls-remote https://github.com/google/benchmark refs/tags/v1.10.0 *>&1 | Add-Content $log
-          w "ls-remote exit=$LASTEXITCODE"
-          $dir = Join-Path $env:RUNNER_TEMP 'probe'
-          Remove-Item $dir -Recurse -Force -ErrorAction SilentlyContinue
-          New-Item -ItemType Directory -Force $dir | Out-Null
-          Push-Location $dir
-          & git clone --depth 1 -b v1.10.0 https://github.com/google/benchmark . *>&1 | Add-Content $log
-          w "clone exit=$LASTEXITCODE"
-          Pop-Location
-          w "GIT_TERMINAL_PROMPT=$env:GIT_TERMINAL_PROMPT http_proxy=$env:http_proxy https_proxy=$env:https_proxy"
+          if not exist diagnostics mkdir diagnostics
+          git --version > "diagnostics\git.log" 2>&1
+          git ls-remote https://github.com/google/benchmark refs/tags/v1.10.0 >> "diagnostics\git.log" 2>&1
+          echo ls-remote=%ERRORLEVEL% >> "diagnostics\git.log"
+          git clone --depth 1 -b v1.10.0 https://github.com/google/benchmark "%RUNNER_TEMP%\probe-benchmark" >> "diagnostics\git.log" 2>&1
+          echo clone-benchmark=%ERRORLEVEL% >> "diagnostics\git.log"
+          git clone --depth 1 https://github.com/google/googletest "%RUNNER_TEMP%\probe-gtest" >> "diagnostics\git.log" 2>&1
+          echo clone-gtest=%ERRORLEVEL% >> "diagnostics\git.log"
+          type "diagnostics\git.log"
 
       - name: conan home
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Continue'
+          $PSNativeCommandUseErrorActionPreference = $false
           $log = 'diagnostics/conan.log'
           function w($m) { "$((Get-Date).ToString('HH:mm:ss')) $m" | Add-Content $log }
           $home = Join-Path $PWD 'conan\cache'
@@ -144,3 +141,4 @@ jobs:
           git add -f diagnostics
           git commit -m "diagnostics for run $env:GITHUB_RUN_NUMBER"
           git push --force origin "HEAD:diagnostics/run-$env:GITHUB_RUN_NUMBER"
+
