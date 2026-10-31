@@ -3,29 +3,33 @@
 # Why: the native core lives in the separate YesSteveModel/YesSteveModel-Native
 # repository and has no published binaries and no CI of its own. A local build
 # needs Visual Studio 2022 with the C++ workload, which not every machine has.
-# windows-2022 runners ship MSVC + Windows SDK + CMake + Ninja, so the whole
-# thing can be built in the cloud for free and downloaded as an artifact.
+# windows-2022 runners ship MSVC + Windows SDK + LLVM, so the whole thing can be
+# built in the cloud for free and downloaded as an artifact.
 #
 # Usage: copy this file into a fork of YesSteveModel-Native as
 #   .github/workflows/build-native.yml
 # then Actions -> build-native -> Run workflow, and download the
 # "ysm-dll-windows-x64" artifact when it finishes.
 #
-# The build scripts accept a plain MSVC toolchain: conan/cmake/targets/
-# windows-x64.cmake only adds clang-specific flags when the compiler is Clang,
-# and `bootstrap.cmd build native` is required to use the PATH toolchain
-# (--toolchain is rejected for the `native` profile).
+# The compiler is clang-cl, not plain MSVC, and that is deliberate:
+# modules/gfx compiles one template body per SIMD level (SSE4.1 / AVX2 / AVX512)
+# with __attribute__((target(...))) function multiversioning, which MSVC does
+# not implement (its cpu.h branch even forgets YSM_TARGET_SSE41). clang-cl is
+# also what docs/official-build-environment_cn.md uses. ThinLTO therefore needs
+# lld-link, so -fuse-ld=lld is handed to clang through CFLAGS/CXXFLAGS.
 #
 # Notes learned the hard way:
 # - NASM is fetched as the official release zip and put on PATH through
 #   GITHUB_PATH. The Chocolatey package runs the vendor NSIS installer, which
-#   never refreshes the PATH of the running step (and its exit-code contract
-#   differs between versions), so it is only the fallback.
-# - Every step tees its output into diagnostics/, and a failure-only step
-#   commits that log to a diagnostics branch: the workflow log itself needs a
-#   token to read, a committed file does not.
+#   never refreshes the PATH of the running step, so it is only the fallback.
 # - CONAN_HOME must point at the repo-local conan/cache: bootstrap.cmd sets it
 #   the same way, and the detected profile + exported recipes live there.
+# - The host profile is written by hand instead of `conan profile detect`,
+#   because detection picks MSVC. bootstrap.cmd only runs `detect -e`, so an
+#   existing default profile is left alone.
+# - Every step tees its output into diagnostics/, and a failure-only step
+#   republishes the tail as annotations plus a diagnostics/run-N branch: the
+#   Actions log itself needs a token to read, annotations do not.
 
 name: build-native
 
@@ -50,6 +54,30 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: x64
+
+      - name: Ensure LLVM clang-cl
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          New-Item -ItemType Directory -Force -Path diagnostics | Out-Null
+          $log = 'diagnostics/llvm.log'
+          $dir = 'C:\Program Files\LLVM\bin'
+          if (-not (Test-Path (Join-Path $dir 'clang-cl.exe'))) {
+            "LLVM not present in $dir; installing with Chocolatey" | Tee-Object -FilePath $log -Append
+            choco install llvm -y --no-progress 2>&1 | Tee-Object -FilePath $log -Append
+            $machine = [Environment]::GetEnvironmentVariable('Path', 'Machine')
+            $user = [Environment]::GetEnvironmentVariable('Path', 'User')
+            $env:Path = "$machine;$user"
+          }
+          if (-not (Test-Path (Join-Path $dir 'clang-cl.exe'))) { throw "clang-cl.exe still missing under $dir" }
+          $env:Path = "$dir;$env:Path"
+          $dir | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+          "CC=clang-cl" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          "CXX=clang-cl" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          "CFLAGS=-fuse-ld=lld" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          "CXXFLAGS=-fuse-ld=lld" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          & clang-cl --version 2>&1 | Tee-Object -FilePath $log -Append
+          & lld-link --version 2>&1 | Tee-Object -FilePath $log -Append
 
       - name: Install NASM
         shell: pwsh
@@ -96,77 +124,33 @@ jobs:
           ninja --version 2>&1 | Tee-Object -FilePath $log -Append
           conan --version 2>&1 | Tee-Object -FilePath $log -Append
 
-      - name: Detect the Conan profile in the repo-local cache
-        shell: cmd
-        run: |
-          set CONAN_HOME=%CD%\conan\cache
-          mkdir diagnostics 2>nul
-          conan profile detect --force > diagnostics\conan-profile.log 2>&1
-          type diagnostics\conan-profile.log
-          if errorlevel 1 exit /b 1
-          type "%CONAN_HOME%\profiles\default"
-
-      - name: Index the dependency recipes
-        shell: cmd
-        run: |
-          mkdir diagnostics 2>nul
-          call bootstrap.cmd setup > diagnostics\bootstrap-setup.log 2>&1
-          set RC=%ERRORLEVEL%
-          type diagnostics\bootstrap-setup.log
-          if not %RC%==0 exit /b %RC%
-
-      - name: Build the native core
-        shell: cmd
-        run: |
-          mkdir diagnostics 2>nul
-          call bootstrap.cmd build native > diagnostics\bootstrap-build.log 2>&1
-          set RC=%ERRORLEVEL%
-          type diagnostics\bootstrap-build.log
-          if not %RC%==0 exit /b %RC%
-
-      - name: Report what was produced
+      - name: Write the clang-cl Conan profile in the repo-local cache
         shell: pwsh
         run: |
-          $dlls = Get-ChildItem -Recurse -Filter ysm.dll -ErrorAction SilentlyContinue
-          if (-not $dlls) { throw 'no ysm.dll was produced' }
-          foreach ($d in $dlls) { "{0}  {1:N0} B" -f $d.FullName, $d.Length }
-
-      - name: Upload ysm.dll
-        uses: actions/upload-artifact@v4
-        with:
-          name: ysm-dll-windows-x64
-          path: "**/ysm.dll"
-          if-no-files-found: error
-
-      # The Actions log requires a token to read; annotations and a committed
-      # file do not. Both are produced here so a failure can be diagnosed
-      # without asking anyone to open the run in a browser.
-      - name: Publish diagnostics on failure
-        if: failure()
-        shell: pwsh
-        run: |
+          $ErrorActionPreference = 'Stop'
           New-Item -ItemType Directory -Force -Path diagnostics | Out-Null
+          $log = 'diagnostics/conan-profile.log'
+          $env:CONAN_HOME = Join-Path $PWD 'conan\cache'
+          New-Item -ItemType Directory -Force -Path (Join-Path $env:CONAN_HOME 'profiles') | Out-Null
 
-          function Emit([string] $message) {
-            $flat = $message.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
-            if ($flat.Trim().Length -gt 0) { Write-Host "::error::$flat" }
-          }
+          $banner = (& clang-cl --version) | Select-Object -First 1
+          $detected = [int]([regex]::Match($banner, 'version\s+(\d+)')).Groups[1].Value
+          "detected: $banner -> major $detected" | Tee-Object -FilePath $log -Append
 
-          $logs = Get-ChildItem diagnostics -Filter *.log -ErrorAction SilentlyContinue
-          if (-not $logs) { Emit "no diagnostics log was written before the failure" }
-          foreach ($log in $logs) {
-            Emit "=== $($log.Name) (tail) ==="
-            Get-Content $log.FullName -Tail 25 | ForEach-Object { Emit $_ }
-          }
+          $candidates = @($detected, $detected - 1, $detected - 2, 20, 19, 18, 17, 16, 15) |
+                          Where-Object { $_ -ge 15 } | Select-Object -Unique
+          $chosen = $null
+          foreach ($candidate in $candidates) {
+            $text = @"
+[settings]
+os=Windows
+arch=x86_64
+build_type=Release
+compiler=clang
+compiler.version=$candidate
+compiler.cppstd=23
+compiler.runtime=static
+compiler.runtime_type=Release
 
-          # Best effort: keep the full logs in the repository as well.
-          try {
-            git config user.name "ysm-ci"
-            git config user.email "ysm-ci@users.noreply.github.com"
-            git checkout -B "diagnostics/run-${{ github.run_number }}"
-            git add -f diagnostics
-            git commit -m "diagnostics for run ${{ github.run_number }}"
-            git push --force origin "HEAD:diagnostics/run-${{ github.run_number }}"
-          } catch {
-            Write-Host "diagnostics were not committed: $_"
-          }
+[conf]
+tools.build:compiler_executables={"c": "clang-cl", "cpp": "clang-cl"}
