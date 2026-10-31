@@ -1,0 +1,23 @@
+git version 2.56.0.windows.3
+f2bc56f35f4f2c9921496d19e25f558e69d1eff7	refs/tags/v1.10.0
+ls-remote=0 
+Cloning into 'D:\a\_temp\probe-benchmark'...
+warning: refs/tags/v1.10.0 f2bc56f35f4f2c9921496d19e25f558e69d1eff7 is not a commit!
+Note: switching to 'a6b4a9f00b36c19af9997d68a1cf6e0b5b3d032c'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+clone-benchmark=0 
