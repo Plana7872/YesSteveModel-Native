@@ -29,17 +29,12 @@ jobs:
           function w($m) { "$((Get-Date).ToString('HH:mm:ss')) $m" | Add-Content $log }
           $llvm = @('C:\Program Files\LLVM\bin', 'C:\Program Files (x86)\LLVM\bin') |
             Where-Object { Test-Path (Join-Path $_ 'clang-cl.exe') } | Select-Object -First 1
-          if (-not $llvm) {
-            w 'clang-cl not on disk, installing llvm with chocolatey'
-            choco install llvm -y --no-progress *>&1 | Add-Content $log
-            $llvm = 'C:\Program Files\LLVM\bin'
-          }
-          if (-not (Test-Path (Join-Path $llvm 'clang-cl.exe'))) { w "missing under $llvm"; throw 'clang-cl missing' }
+          if (-not $llvm) { throw 'clang-cl.exe not found under the known LLVM directories' }
           w "llvm=$llvm"
           $llvm | Out-File $env:GITHUB_PATH -Append -Encoding utf8
           "CC=clang-cl`nCXX=clang-cl`nCFLAGS=-fuse-ld=lld`nCXXFLAGS=-fuse-ld=lld" |
             Out-File $env:GITHUB_ENV -Append -Encoding utf8
-          w ((& (Join-Path $llvm 'clang-cl.exe') --version) -join ' | ')
+          w "$(& (Join-Path $llvm 'clang-cl.exe') --version | Select-Object -First 1)"
 
       - name: nasm
         shell: pwsh
@@ -48,69 +43,81 @@ jobs:
           New-Item -ItemType Directory -Force diagnostics | Out-Null
           $log = 'diagnostics/nasm.log'
           function w($m) { "$((Get-Date).ToString('HH:mm:ss')) $m" | Add-Content $log }
-          $dir = $null
           $zip = Join-Path $env:RUNNER_TEMP 'nasm.zip'
-          $url = 'https://www.nasm.us/pub/nasm/releasebuilds/2.16.03/win64/nasm-2.16.03-win64.zip'
-          try {
-            curl.exe -fSsL --retry 2 --max-time 300 -o $zip $url
-            $rc = $LASTEXITCODE
-            $size = if (Test-Path $zip) { (Get-Item $zip).Length } else { -1 }
-            w "curl exit=$rc size=$size"
-            if ($rc -ne 0 -or $size -le 0) { throw "download failed exit=$rc size=$size" }
-            Expand-Archive -LiteralPath $zip -DestinationPath (Join-Path $env:RUNNER_TEMP 'nasm') -Force
-            $dir = (Get-ChildItem (Join-Path $env:RUNNER_TEMP 'nasm') -Recurse -Filter nasm.exe |
-                      Select-Object -First 1).DirectoryName
-            w "zip dir=$dir"
-          } catch {
-            w "zip path failed: $($_.Exception.Message)"
-          }
-          if (-not $dir) {
-            try {
-              choco install nasm -y --no-progress *>&1 | Add-Content $log
-              $dir = (Get-ChildItem 'C:\Program Files', 'C:\Program Files (x86)' -Recurse -Filter nasm.exe `
-                        -ErrorAction SilentlyContinue | Select-Object -First 1).DirectoryName
-              w "choco dir=$dir"
-            } catch {
-              w "choco path failed: $($_.Exception.Message)"
-            }
-          }
-          if (-not $dir) { throw 'nasm.exe not found' }
+          curl.exe -fSsL --retry 2 --max-time 300 -o $zip 'https://www.nasm.us/pub/nasm/releasebuilds/2.16.03/win64/nasm-2.16.03-win64.zip'
+          if ($LASTEXITCODE -ne 0) { throw "nasm download failed ($LASTEXITCODE)" }
+          Expand-Archive -LiteralPath $zip -DestinationPath (Join-Path $env:RUNNER_TEMP 'nasm') -Force
+          $dir = (Get-ChildItem (Join-Path $env:RUNNER_TEMP 'nasm') -Recurse -Filter nasm.exe |
+                    Select-Object -First 1).DirectoryName
+          if (-not $dir) { throw 'nasm.exe missing from the release zip' }
+          w "nasm=$dir"
           $dir | Out-File $env:GITHUB_PATH -Append -Encoding utf8
-          w ((& (Join-Path $dir 'nasm.exe') -v) -join ' | ')
+          w "$(& (Join-Path $dir 'nasm.exe') -v)"
 
       - name: pip tools
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force diagnostics | Out-Null
           $log = 'diagnostics/pip.log'
-          "python: $(python --version 2>&1)" | Add-Content $log
+          function w($m) { "$((Get-Date).ToString('HH:mm:ss')) $m" | Add-Content $log }
+          $python = (Get-Command python).Source
+          w "python=$python $(& python --version 2>&1)"
           python -m pip install --upgrade "conan>=2.28" "cmake>=3.29" ninja *>&1 | Add-Content $log
           $rc = $LASTEXITCODE
-          "pip exit=$rc" | Add-Content $log
+          w "pip exit=$rc"
           if ($rc -ne 0) { throw "pip install failed ($rc)" }
-          "conan: $(conan --version 2>&1)" | Add-Content $log
+          $scripts = Join-Path (Split-Path $python) 'Scripts'
+          if (-not (Test-Path (Join-Path $scripts 'conan.exe'))) { $scripts = Split-Path $python }
+          $conan = Join-Path $scripts 'conan.exe'
+          if (-not (Test-Path $conan)) {
+            $found = Get-ChildItem (Split-Path $python) -Recurse -Filter conan.exe -ErrorAction SilentlyContinue |
+              Select-Object -First 1
+            if ($found) { $conan = $found.FullName }
+          }
+          if (-not (Test-Path $conan)) { throw "conan.exe not found after pip install (scripts=$scripts)" }
+          w "conan=$conan"
+          $scripts | Out-File $env:GITHUB_PATH -Append -Encoding utf8
+          "YSM_CONAN=$conan" | Out-File $env:GITHUB_ENV -Append -Encoding utf8
+          w "$(& $conan --version 2>&1)"
 
       - name: conan profile
         shell: pwsh
         run: |
+          $ErrorActionPreference = 'Continue'
           $log = 'diagnostics/conan.log'
           function w($m) { "$((Get-Date).ToString('HH:mm:ss')) $m" | Add-Content $log }
+          $conan = $env:YSM_CONAN
+          w "conan=$conan"
           $env:CONAN_HOME = Join-Path $PWD 'conan\cache'
           New-Item -ItemType Directory -Force (Join-Path $env:CONAN_HOME 'profiles') | Out-Null
-          $v = [int]([regex]::Match((clang-cl --version)[0], '\d+').Value)
+          $banner = (& clang-cl --version | Select-Object -First 1)
+          $v = [int]([regex]::Match($banner, '\d+').Value)
           w "clang major=$v"
+          $ok = $false
           foreach ($c in @($v, $v - 1, $v - 2, 20, 19, 18, 17) | Select-Object -Unique) {
-            "[settings]`nos=Windows`narch=x86_64`nbuild_type=Release`ncompiler=clang`ncompiler.version=$c`ncompiler.cppstd=23`ncompiler.runtime=static`ncompiler.runtime_type=Release`n`n[conf]`ntools.build:compiler_executables={""c"": ""clang-cl"", ""cpp"": ""clang-cl""}" |
-              Set-Content (Join-Path $env:CONAN_HOME 'profiles\default') -Encoding utf8
-            conan profile show -pr default *> diagnostics/conan-candidate.log
+            @(
+              '[settings]',
+              'os=Windows',
+              'arch=x86_64',
+              'build_type=Release',
+              'compiler=clang',
+              "compiler.version=$c",
+              'compiler.cppstd=23',
+              'compiler.runtime=static',
+              'compiler.runtime_type=Release',
+              '',
+              '[conf]',
+              'tools.build:compiler_executables={"c": "clang-cl", "cpp": "clang-cl"}'
+            ) | Set-Content (Join-Path $env:CONAN_HOME 'profiles\default') -Encoding utf8
+            & $conan profile show -pr default *> diagnostics/conan-candidate.log
             $rc = $LASTEXITCODE
             w "candidate=$c exit=$rc"
-            if ($rc -eq 0) { break }
-            Get-Content diagnostics/conan-candidate.log -Tail 3 | Add-Content $log
+            if ($rc -eq 0) { $ok = $true; break }
+            Get-Content diagnostics/conan-candidate.log -Tail 4 | Add-Content $log
           }
-          conan profile show -pr default *> diagnostics/conan-final.log
-          if ($LASTEXITCODE -ne 0) {
-            Get-Content diagnostics/conan-final.log -Tail 12 | Add-Content $log
+          if (-not $ok) {
+            w 'profile content:'
+            Get-Content (Join-Path $env:CONAN_HOME 'profiles\default') | Add-Content $log
             throw 'no usable clang conan profile'
           }
 
