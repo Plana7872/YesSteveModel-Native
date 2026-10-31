@@ -83,36 +83,28 @@ jobs:
           if errorlevel 1 ( exit /b 1 )
 
       - name: profile
-        shell: pwsh
+        shell: cmd
         run: |
-          $ErrorActionPreference = 'Stop'
-          $PSNativeCommandUseErrorActionPreference = $false
-          $log = 'diagnostics/conan.log'
-          function w($m) { "$((Get-Date).ToString('HH:mm:ss')) $m" | Add-Content $log }
-          $home = Join-Path $PWD 'conan\cache'
-          $env:CONAN_HOME = $home
-          "CONAN_HOME=$home" | Out-File $env:GITHUB_ENV -Append -Encoding utf8
-          New-Item -ItemType Directory -Force (Join-Path $home 'profiles') | Out-Null
-          $lines = @(
-            '[settings]',
-            'os=Windows',
-            'arch=x86_64',
-            'build_type=Release',
-            'compiler=clang',
-            "compiler.version=$($env:YSM_CLANG_MAJOR)",
-            'compiler.runtime_version=v144',
-            'compiler.cppstd=23',
-            'compiler.runtime=static',
-            'compiler.runtime_type=Release',
-            '',
-            '[conf]',
-            'tools.build:compiler_executables={"c": "clang-cl", "cpp": "clang-cl"}'
-          )
-          $profile = Join-Path $home 'profiles\default'
-          [IO.File]::WriteAllLines($profile, $lines)
-          w "wrote $profile"
-          & $env:YSM_CONAN profile show -pr default *>&1 | Add-Content $log
-          w "profile show exit=$LASTEXITCODE"
+          set CONAN_HOME=%CD%\conan\cache
+          if not exist "%CONAN_HOME%\profiles" mkdir "%CONAN_HOME%\profiles"
+          set "P=%CONAN_HOME%\profiles\default"
+          echo profile start > "diagnostics\conan.log"
+          > "%P%" echo [settings]
+          >> "%P%" echo os=Windows
+          >> "%P%" echo arch=x86_64
+          >> "%P%" echo build_type=Release
+          >> "%P%" echo compiler=clang
+          >> "%P%" echo compiler.version=%YSM_CLANG_MAJOR%
+          >> "%P%" echo compiler.runtime_version=v144
+          >> "%P%" echo compiler.cppstd=23
+          >> "%P%" echo compiler.runtime=static
+          >> "%P%" echo compiler.runtime_type=Release
+          >> "%P%" echo.
+          >> "%P%" echo [conf]
+          >> "%P%" echo tools.build:compiler_executables={"c": "clang-cl", "cpp": "clang-cl"}
+          type "%P%" >> "diagnostics\conan.log"
+          conan profile show -pr default >> "diagnostics\conan.log" 2>&1
+          echo profile-show=%ERRORLEVEL% >> "diagnostics\conan.log"
 
       - name: build
         shell: cmd
@@ -146,4 +138,5 @@ jobs:
           git add -f diagnostics
           git commit -m "diagnostics for run $env:GITHUB_RUN_NUMBER"
           git push --force origin "HEAD:diagnostics/run-$env:GITHUB_RUN_NUMBER"
+
 
