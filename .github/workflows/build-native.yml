@@ -5,6 +5,9 @@ on:
   push:
     branches: [dev]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: windows-2022
@@ -20,12 +23,12 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: llvm
+      - name: toolchain
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
           New-Item -ItemType Directory -Force diagnostics | Out-Null
-          $log = 'diagnostics/llvm.log'
+          $log = 'diagnostics/toolchain.log'
           function w($m) { "$((Get-Date).ToString('HH:mm:ss')) $m" | Add-Content $log }
           $llvm = @('C:\Program Files\LLVM\bin', 'C:\Program Files (x86)\LLVM\bin') |
             Where-Object { Test-Path (Join-Path $_ 'clang-cl.exe') } | Select-Object -First 1
@@ -34,28 +37,17 @@ jobs:
           "CC=clang-cl`nCXX=clang-cl`nCFLAGS=-fuse-ld=lld`nCXXFLAGS=-fuse-ld=lld" |
             Out-File $env:GITHUB_ENV -Append -Encoding utf8
           $banner = (& (Join-Path $llvm 'clang-cl.exe') --version | Select-Object -First 1)
-          w "llvm=$llvm"
-          w $banner
           $major = [regex]::Match($banner, '\d+').Value
           "YSM_CLANG_MAJOR=$major" | Out-File $env:GITHUB_ENV -Append -Encoding utf8
-          w "major=$major"
-
-      - name: nasm
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = 'Stop'
-          $log = 'diagnostics/nasm.log'
-          function w($m) { "$((Get-Date).ToString('HH:mm:ss')) $m" | Add-Content $log }
+          w "llvm=$llvm $banner"
           $zip = Join-Path $env:RUNNER_TEMP 'nasm.zip'
           curl.exe -fSsL --retry 2 --max-time 300 -o $zip 'https://www.nasm.us/pub/nasm/releasebuilds/2.16.03/win64/nasm-2.16.03-win64.zip'
           if ($LASTEXITCODE -ne 0) { throw "nasm download failed ($LASTEXITCODE)" }
           Expand-Archive -LiteralPath $zip -DestinationPath (Join-Path $env:RUNNER_TEMP 'nasm') -Force
-          $dir = (Get-ChildItem (Join-Path $env:RUNNER_TEMP 'nasm') -Recurse -Filter nasm.exe |
-                    Select-Object -First 1).DirectoryName
-          if (-not $dir) { throw 'nasm.exe missing from the release zip' }
+          $dir = (Get-ChildItem (Join-Path $env:RUNNER_TEMP 'nasm') -Recurse -Filter nasm.exe).DirectoryName |
+            Select-Object -First 1
           $dir | Out-File $env:GITHUB_PATH -Append -Encoding utf8
           w "nasm=$dir"
-          w "$(& (Join-Path $dir 'nasm.exe') -v)"
 
       - name: pip tools
         shell: pwsh
@@ -70,6 +62,23 @@ jobs:
           $conan | Split-Path | Out-File $env:GITHUB_PATH -Append -Encoding utf8
           "YSM_CONAN=$conan" | Out-File $env:GITHUB_ENV -Append -Encoding utf8
           w "$(& $conan --version 2>&1)"
+
+      - name: git probe
+        shell: pwsh
+        run: |
+          $log = 'diagnostics/git.log'
+          function w($m) { "$((Get-Date).ToString('HH:mm:ss')) $m" | Add-Content $log }
+          w "$(& git --version 2>&1)"
+          & git ls-remote https://github.com/google/benchmark refs/tags/v1.10.0 *>&1 | Add-Content $log
+          w "ls-remote exit=$LASTEXITCODE"
+          $dir = Join-Path $env:RUNNER_TEMP 'probe'
+          Remove-Item $dir -Recurse -Force -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Force $dir | Out-Null
+          Push-Location $dir
+          & git clone --depth 1 -b v1.10.0 https://github.com/google/benchmark . *>&1 | Add-Content $log
+          w "clone exit=$LASTEXITCODE"
+          Pop-Location
+          w "GIT_TERMINAL_PROMPT=$env:GIT_TERMINAL_PROMPT http_proxy=$env:http_proxy https_proxy=$env:https_proxy"
 
       - name: conan home
         shell: pwsh
@@ -97,7 +106,6 @@ jobs:
           )
           $profile = Join-Path $home 'profiles\default'
           [IO.File]::WriteAllLines($profile, $lines)
-          w "wrote $profile"
           & $env:YSM_CONAN profile show -pr default *>&1 | Add-Content $log
           w "profile show exit=$LASTEXITCODE"
 
@@ -107,9 +115,9 @@ jobs:
           set CONAN_HOME=%CD%\conan\cache
           mkdir diagnostics 2>nul
           call bootstrap.cmd setup > diagnostics\setup.log 2>&1
-          if errorlevel 1 ( type diagnostics\setup.log & exit /b 1 )
+          if errorlevel 1 ( exit /b 1 )
           call bootstrap.cmd build native > diagnostics\build.log 2>&1
-          if errorlevel 1 ( type diagnostics\build.log & exit /b 1 )
+          if errorlevel 1 ( exit /b 1 )
 
       - uses: actions/upload-artifact@v4
         with:
@@ -123,6 +131,16 @@ jobs:
         run: |
           Get-ChildItem diagnostics -Filter *.log -ErrorAction SilentlyContinue | ForEach-Object {
             Write-Host "::group:: $($_.Name)"
-            Get-Content $_.FullName -Tail 40 | ForEach-Object { Write-Host ('::error::' + $_.Replace('%', '%25')) }
+            Get-Content $_.FullName -Tail 30 | ForEach-Object { Write-Host ('::error::' + $_.Replace('%', '%25')) }
             Write-Host '::endgroup::'
           }
+
+      - name: publish logs
+        if: failure()
+        shell: pwsh
+        run: |
+          git config user.name 'ysm-ci'
+          git config user.email 'ysm-ci@users.noreply.github.com'
+          git add -f diagnostics
+          git commit -m "diagnostics for run $env:GITHUB_RUN_NUMBER"
+          git push --force origin "HEAD:diagnostics/run-$env:GITHUB_RUN_NUMBER"
