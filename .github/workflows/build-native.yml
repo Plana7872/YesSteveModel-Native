@@ -1,0 +1,76 @@
+# Build the YSM native core (ysm.dll) on GitHub's Windows runner.
+#
+# Why: the native core lives in the separate YesSteveModel/YesSteveModel-Native
+# repository and has no published binaries and no CI of its own. A local build
+# needs Visual Studio 2022 with the C++ workload, which not every machine has.
+# windows-2022 runners ship MSVC + Windows SDK + CMake + Ninja, so the whole
+# thing can be built in the cloud for free and downloaded as an artifact.
+#
+# Usage: copy this file into a fork of YesSteveModel-Native as
+#   .github/workflows/build-native.yml
+# then Actions -> build-native -> Run workflow, and download the
+# "ysm-dll-windows-x64" artifact when it finishes.
+#
+# The build scripts accept a plain MSVC toolchain: conan/cmake/targets/
+# windows-x64.cmake only adds clang-specific flags when the compiler is Clang,
+# and `bootstrap.cmd build native` is required to use the PATH toolchain
+# (--toolchain is rejected for the `native` profile).
+
+name: build-native
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [dev]
+
+jobs:
+  windows-x64:
+    runs-on: windows-2022
+    timeout-minutes: 300
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Enable the MSVC x64 environment
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
+      - name: Install the remaining toolchain
+        shell: pwsh
+        run: |
+          choco install nasm -y --no-progress
+          python -m pip install --upgrade "conan>=2.28" "cmake>=3.29" ninja
+          cmake --version
+          ninja --version
+          conan --version
+          nasm -v
+
+      - name: Detect the Conan profile in the repo-local cache
+        shell: cmd
+        run: |
+          set CONAN_HOME=%CD%\conan\cache
+          conan profile detect --force
+
+      - name: Index the dependency recipes
+        shell: cmd
+        run: bootstrap.cmd setup
+
+      - name: Build the native core
+        shell: cmd
+        run: bootstrap.cmd build native
+
+      - name: Report what was produced
+        shell: pwsh
+        run: |
+          $dlls = Get-ChildItem -Recurse -Filter ysm.dll -ErrorAction SilentlyContinue
+          if (-not $dlls) { Write-Error "no ysm.dll was produced"; exit 1 }
+          foreach ($d in $dlls) { "{0}  {1:N0} B" -f $d.FullName, $d.Length }
+
+      - name: Upload ysm.dll
+        uses: actions/upload-artifact@v4
+        with:
+          name: ysm-dll-windows-x64
+          path: "**/ysm.dll"
+          if-no-files-found: error
