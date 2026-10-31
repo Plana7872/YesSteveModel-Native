@@ -1,0 +1,49 @@
+Collecting conan>=2.28
+  Downloading conan-2.34.0-py3-none-any.whl.metadata (9.0 kB)
+Collecting cmake>=3.29
+  Downloading cmake-4.4.4-py3-none-win_amd64.whl.metadata (7.0 kB)
+Collecting ninja
+  Downloading ninja-1.13.2-py3-none-win_amd64.whl.metadata (5.4 kB)
+Collecting requests<3.0.0,>=2.25 (from conan>=2.28)
+  Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+Collecting urllib3<3.0,>=1.26.6 (from conan>=2.28)
+  Downloading urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+Requirement already satisfied: colorama<0.5.0,>=0.4.3 in C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\site-packages (from conan>=2.28) (0.4.6)
+Collecting PyYAML<7.0,>=6.0 (from conan>=2.28)
+  Downloading pyyaml-6.0.3-cp312-cp312-win_amd64.whl.metadata (2.4 kB)
+Collecting patch-ng<1.20,>=1.18.0 (from conan>=2.28)
+  Downloading patch_ng-1.19.1-py3-none-any.whl.metadata (3.2 kB)
+Collecting fasteners>=0.15 (from conan>=2.28)
+  Downloading fasteners-0.20-py3-none-any.whl.metadata (4.8 kB)
+Collecting Jinja2<4.0.0,>=3.0 (from conan>=2.28)
+  Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting truststore<1.0,>=0.8 (from conan>=2.28)
+  Downloading truststore-0.10.5-py3-none-any.whl.metadata (4.5 kB)
+Collecting MarkupSafe>=2.0 (from Jinja2<4.0.0,>=3.0->conan>=2.28)
+  Downloading markupsafe-3.0.4-cp312-cp312-win_amd64.whl.metadata (2.8 kB)
+Collecting charset_normalizer<4,>=2 (from requests<3.0.0,>=2.25->conan>=2.28)
+  Downloading charset_normalizer-3.5.2-cp312-cp312-win_amd64.whl.metadata (47 kB)
+Collecting idna<4,>=2.5 (from requests<3.0.0,>=2.25->conan>=2.28)
+  Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting certifi>=2023.5.7 (from requests<3.0.0,>=2.25->conan>=2.28)
+  Downloading certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+Downloading conan-2.34.0-py3-none-any.whl (750 kB)
+   ---------------------------------------- 750.7/750.7 kB 10.4 MB/s  0:00:00
+Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+Downloading patch_ng-1.19.1-py3-none-any.whl (17 kB)
+Downloading pyyaml-6.0.3-cp312-cp312-win_amd64.whl (154 kB)
+Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+Downloading charset_normalizer-3.5.2-cp312-cp312-win_amd64.whl (207 kB)
+Downloading idna-3.20-py3-none-any.whl (69 kB)
+Downloading truststore-0.10.5-py3-none-any.whl (19 kB)
+Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)
+Downloading cmake-4.4.4-py3-none-win_amd64.whl (42.3 MB)
+   ---------------------------------------- 42.3/42.3 MB 59.8 MB/s  0:00:00
+Downloading ninja-1.13.2-py3-none-win_amd64.whl (311 kB)
+Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+Downloading fasteners-0.20-py3-none-any.whl (18 kB)
+Downloading markupsafe-3.0.4-cp312-cp312-win_amd64.whl (14 kB)
+Installing collected packages: urllib3, truststore, PyYAML, patch-ng, ninja, MarkupSafe, idna, fasteners, cmake, charset_normalizer, certifi, requests, Jinja2, conan
+
+Successfully installed Jinja2-3.1.6 MarkupSafe-3.0.4 PyYAML-6.0.3 certifi-2026.10.23 charset_normalizer-3.5.2 cmake-4.4.4 conan-2.34.0 fasteners-0.20 idna-3.20 ninja-1.13.2 patch-ng-1.19.1 requests-2.34.2 truststore-0.10.5 urllib3-2.8.0
+18:39:14 Conan version 2.34.0

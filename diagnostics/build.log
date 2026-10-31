@@ -1,0 +1,307 @@
++ "conan" profile detect -e
+detect_api: CC and CXX: clang-cl, clang-cl 
+detect_api: Found clang 20.1
+detect_api: clang>=8, using the major as version
+detect_api: WARN: Assuming LLVM/Clang in Windows with VS 17 2022
+detect_api: WARN: If Msys2/Clang need to remove compiler.runtime* and define compiler.libcxx
+
+Detected profile:
+WARN: This profile is a guess of your environment, please check it.
+WARN: The output of this command is not guaranteed to be stable and can change in future Conan versions.
+WARN: Use your own profile files for stability.
+Saving detected profile to D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\profiles\default
+[settings]
+arch=x86_64
+build_type=Release
+compiler=clang
+compiler.cppstd=gnu17
+compiler.runtime=dynamic
+compiler.runtime_version=v143
+compiler.version=20
+os=Windows
+
++ "conan" build "D:\a\YesSteveModel-Native\YesSteveModel-Native" -pr:h default -pr:h "D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\profile-override" -s:h compiler.runtime=static -pr:b default --no-remote --build=missing -s build_type=Release -c:h "user.target:profile=native" --core-conf core.graph:compatibility_mode=optimized
+
+======== Input profiles ========
+Profile host:
+[settings]
+arch=x86_64
+build_type=Release
+compiler=clang
+compiler.cppstd=23
+compiler.runtime=static
+compiler.runtime_type=Release
+compiler.runtime_version=v143
+compiler.version=20
+os=Windows
+[conf]
+tools.cmake.cmaketoolchain:generator=Ninja
+tools.cmake.cmaketoolchain:user_toolchain=['D:/a/YesSteveModel-Native/YesSteveModel-Native/conan/cmake/pre-setup.cmake']
+user.target:profile=native
+user.ysm:rev=2026.10.27.2
+
+Profile build:
+[settings]
+arch=x86_64
+build_type=Release
+compiler=clang
+compiler.cppstd=gnu17
+compiler.runtime=dynamic
+compiler.runtime_type=Release
+compiler.runtime_version=v143
+compiler.version=20
+os=Windows
+[conf]
+
+
+
+======== Computing dependency graph ========
+Graph root
+    conanfile.py (ysm/3.0): D:\a\YesSteveModel-Native\YesSteveModel-Native\conanfile.py
+Requirements
+    abseil/20260817.0@ysm/stable#a4fd45cfdf7ad4f643ba9f4c096d2bba - Cache
+    avif/1.4.2@ysm/stable#c44aa0397a83bb3596a3063fedb2eb5e - Cache
+    blake3/1.8.7@ysm/stable#7fc9f889aa64fdeff645600a9b6236ef - Cache
+    cglm/0.9.7@ysm/stable#be24e7c9533353331333601812d12a5f - Cache
+    cpu_features/0.11.0@ysm/stable#18b053dc456cfe3a612d9a4a63e1a669 - Cache
+    cryptopp/8.9.0@ysm/stable#45925fe251f5fe8b5c71d18a4c965abd - Cache
+    dav1d/1.5.4@ysm/stable#8c955db71f789351d991ea42683efcc0 - Cache
+    jni/8.0.0@ysm/stable#9f4530e8e01a0a5de2ba003a34414708 - Cache
+    jpeg-turbo/3.2.0@ysm/stable#860f46ab069c72b9174fd81684878ed4 - Cache
+    lzma/26.02@ysm/stable#66a331571effde6d666bbe403ba07436 - Cache
+    magic_enum/0.9.8@ysm/stable#ec48e66848cda314c9111129cb20c355 - Cache
+    mimalloc/3.6.0@ysm/stable#4c9c76dc1f7c8cf8b7f7bf1c43cfbf45 - Cache
+    minizip-ng/4.2.2@ysm/stable#b817e2cbd29c38f999e84611816e513f - Cache
+    ogg/1.3.6@ysm/stable#80ca4d8ef55d63519891068435b9d8e3 - Cache
+    optional_ref/0.3.1@ysm/stable#e70771c2be03d3271a86457d9c89f866 - Cache
+    opus/1.6.1@ysm/stable#ddd78ef41cd2a6a152396092441cc1d1 - Cache
+    proxy/4.1.0@ysm/stable#0a04a14ceed744c7d99d26fb7b2f051f - Cache
+    pystring/1.2.0@ysm/stable#c635d532f0e40f33e1cb7dacc65ef5c8 - Cache
+    speexdsp/1.2.1@ysm/stable#49a0103da30234976fa067dabcfe8f47 - Cache
+    spng/0.7.4@ysm/stable#147b9d09248c85a2795dc4d9ec73ea88 - Cache
+    svt-av1/4.2.0@ysm/stable#68b0d3449ebd12c79df8add5dc52d77b - Cache
+    tracy/0.14.1@ysm/stable#1ca9b2b2d1aba6f0ad56fb9d38a1e5f9 - Cache
+    vorbis/1.3.7@ysm/stable#d3af124cec162e248cf8c209f2999c5a - Cache
+    webp/1.6.0@ysm/stable#2edb7a34db59c8cd32a24f568d9992ac - Cache
+    yalantinglibs/0.6.1@ysm/stable#f7147a2a0bc76f5eff1e20d589278220 - Cache
+    yuv/0.0.1974@ysm/stable#c37fe87acd6aa988294bb20b9477f974 - Cache
+    zlib-ng/2.3.3@ysm/stable#05f18a7d8a7285b9d75a8975d0a823d5 - Cache
+    zstd/1.5.7@ysm/stable#eaa8aead451a165b8c41058c130223f5 - Cache
+Test requirements
+    benchmark/1.10.0@ysm/stable#f36ae508b467db9acc0c1b156890508f - Cache
+    googletest/1.18.0@ysm/stable#d142fdd8bc8e66980a865111c5a3ad62 - Cache
+    re2/2025-11-05@ysm/stable#a28dab621f464a93c427777a36011bbe - Cache
+Python requires
+    ysm_dependency_base/0.1@ysm/stable#dea8b5ada93e9f4bc4015a5274e55a17 - Cache
+
+======== Computing necessary packages ========
+benchmark/1.10.0@ysm/stable: Main binary package 'ac0daf7c31732d4ddc1c01e7fd633df2f90e7963' missing
+benchmark/1.10.0@ysm/stable: Checking 13 compatible configurations
+benchmark/1.10.0@ysm/stable: Compatible configurations not found in cache, checking servers
+benchmark/1.10.0@ysm/stable: Found 0 compatible configurations in remotes
+benchmark/1.10.0@ysm/stable: No compatible configuration found
+blake3/1.8.7@ysm/stable: Main binary package 'ac0daf7c31732d4ddc1c01e7fd633df2f90e7963' missing
+blake3/1.8.7@ysm/stable: Checking 13 compatible configurations
+blake3/1.8.7@ysm/stable: Compatible configurations not found in cache, checking servers
+blake3/1.8.7@ysm/stable: Found 0 compatible configurations in remotes
+blake3/1.8.7@ysm/stable: No compatible configuration found
+cpu_features/0.11.0@ysm/stable: Main binary package 'ac0daf7c31732d4ddc1c01e7fd633df2f90e7963' missing
+cpu_features/0.11.0@ysm/stable: Checking 13 compatible configurations
+cpu_features/0.11.0@ysm/stable: Compatible configurations not found in cache, checking servers
+cpu_features/0.11.0@ysm/stable: Found 0 compatible configurations in remotes
+cpu_features/0.11.0@ysm/stable: No compatible configuration found
+mimalloc/3.6.0@ysm/stable: Main binary package 'ac0daf7c31732d4ddc1c01e7fd633df2f90e7963' missing
+mimalloc/3.6.0@ysm/stable: Checking 13 compatible configurations
+mimalloc/3.6.0@ysm/stable: Compatible configurations not found in cache, checking servers
+mimalloc/3.6.0@ysm/stable: Found 0 compatible configurations in remotes
+mimalloc/3.6.0@ysm/stable: No compatible configuration found
+pystring/1.2.0@ysm/stable: Main binary package 'ac0daf7c31732d4ddc1c01e7fd633df2f90e7963' missing
+pystring/1.2.0@ysm/stable: Checking 13 compatible configurations
+pystring/1.2.0@ysm/stable: Compatible configurations not found in cache, checking servers
+pystring/1.2.0@ysm/stable: Found 0 compatible configurations in remotes
+pystring/1.2.0@ysm/stable: No compatible configuration found
+cryptopp/8.9.0@ysm/stable: Main binary package '26258110b32b494b8dfa494ba3cae6decf324f4a' missing
+cryptopp/8.9.0@ysm/stable: Checking 13 compatible configurations
+cryptopp/8.9.0@ysm/stable: Compatible configurations not found in cache, checking servers
+cryptopp/8.9.0@ysm/stable: Found 0 compatible configurations in remotes
+cryptopp/8.9.0@ysm/stable: No compatible configuration found
+dav1d/1.5.4@ysm/stable: Main binary package '900e4c862c94d1cecb0394759386c338048fe85b' missing
+dav1d/1.5.4@ysm/stable: Checking 13 compatible configurations
+dav1d/1.5.4@ysm/stable: Compatible configurations not found in cache, checking servers
+dav1d/1.5.4@ysm/stable: Found 0 compatible configurations in remotes
+dav1d/1.5.4@ysm/stable: No compatible configuration found
+lzma/26.02@ysm/stable: Main binary package '900e4c862c94d1cecb0394759386c338048fe85b' missing
+lzma/26.02@ysm/stable: Checking 13 compatible configurations
+lzma/26.02@ysm/stable: Compatible configurations not found in cache, checking servers
+lzma/26.02@ysm/stable: Found 0 compatible configurations in remotes
+lzma/26.02@ysm/stable: No compatible configuration found
+ogg/1.3.6@ysm/stable: Main binary package '900e4c862c94d1cecb0394759386c338048fe85b' missing
+ogg/1.3.6@ysm/stable: Checking 13 compatible configurations
+ogg/1.3.6@ysm/stable: Compatible configurations not found in cache, checking servers
+ogg/1.3.6@ysm/stable: Found 0 compatible configurations in remotes
+ogg/1.3.6@ysm/stable: No compatible configuration found
+opus/1.6.1@ysm/stable: Main binary package '900e4c862c94d1cecb0394759386c338048fe85b' missing
+opus/1.6.1@ysm/stable: Checking 13 compatible configurations
+opus/1.6.1@ysm/stable: Compatible configurations not found in cache, checking servers
+opus/1.6.1@ysm/stable: Found 0 compatible configurations in remotes
+opus/1.6.1@ysm/stable: No compatible configuration found
+speexdsp/1.2.1@ysm/stable: Main binary package '900e4c862c94d1cecb0394759386c338048fe85b' missing
+speexdsp/1.2.1@ysm/stable: Checking 13 compatible configurations
+speexdsp/1.2.1@ysm/stable: Compatible configurations not found in cache, checking servers
+speexdsp/1.2.1@ysm/stable: Found 0 compatible configurations in remotes
+speexdsp/1.2.1@ysm/stable: No compatible configuration found
+svt-av1/4.2.0@ysm/stable: Main binary package '900e4c862c94d1cecb0394759386c338048fe85b' missing
+svt-av1/4.2.0@ysm/stable: Checking 13 compatible configurations
+svt-av1/4.2.0@ysm/stable: Compatible configurations not found in cache, checking servers
+svt-av1/4.2.0@ysm/stable: Found 0 compatible configurations in remotes
+svt-av1/4.2.0@ysm/stable: No compatible configuration found
+tracy/0.14.1@ysm/stable: Main binary package '7cc1b46249661d8613b8fee9d277f0e7b9e3fe36' missing
+tracy/0.14.1@ysm/stable: Checking 13 compatible configurations
+tracy/0.14.1@ysm/stable: Compatible configurations not found in cache, checking servers
+tracy/0.14.1@ysm/stable: Found 0 compatible configurations in remotes
+tracy/0.14.1@ysm/stable: No compatible configuration found
+webp/1.6.0@ysm/stable: Main binary package '900e4c862c94d1cecb0394759386c338048fe85b' missing
+webp/1.6.0@ysm/stable: Checking 13 compatible configurations
+webp/1.6.0@ysm/stable: Compatible configurations not found in cache, checking servers
+webp/1.6.0@ysm/stable: Found 0 compatible configurations in remotes
+webp/1.6.0@ysm/stable: No compatible configuration found
+yalantinglibs/0.6.1@ysm/stable: Main binary package '900e4c862c94d1cecb0394759386c338048fe85b' missing
+yalantinglibs/0.6.1@ysm/stable: Checking 13 compatible configurations
+yalantinglibs/0.6.1@ysm/stable: Compatible configurations not found in cache, checking servers
+yalantinglibs/0.6.1@ysm/stable: Found 0 compatible configurations in remotes
+yalantinglibs/0.6.1@ysm/stable: No compatible configuration found
+yuv/0.0.1974@ysm/stable: Main binary package '900e4c862c94d1cecb0394759386c338048fe85b' missing
+yuv/0.0.1974@ysm/stable: Checking 13 compatible configurations
+yuv/0.0.1974@ysm/stable: Compatible configurations not found in cache, checking servers
+yuv/0.0.1974@ysm/stable: Found 0 compatible configurations in remotes
+yuv/0.0.1974@ysm/stable: No compatible configuration found
+zlib-ng/2.3.3@ysm/stable: Main binary package '900e4c862c94d1cecb0394759386c338048fe85b' missing
+zlib-ng/2.3.3@ysm/stable: Checking 13 compatible configurations
+zlib-ng/2.3.3@ysm/stable: Compatible configurations not found in cache, checking servers
+zlib-ng/2.3.3@ysm/stable: Found 0 compatible configurations in remotes
+zlib-ng/2.3.3@ysm/stable: No compatible configuration found
+zstd/1.5.7@ysm/stable: Main binary package '900e4c862c94d1cecb0394759386c338048fe85b' missing
+zstd/1.5.7@ysm/stable: Checking 13 compatible configurations
+zstd/1.5.7@ysm/stable: Compatible configurations not found in cache, checking servers
+zstd/1.5.7@ysm/stable: Found 0 compatible configurations in remotes
+zstd/1.5.7@ysm/stable: No compatible configuration found
+re2/2025-11-05@ysm/stable: WARN: risk: Transitive dependencies with 'headers=False' effect in 'package_id' is not necessary and suboptimal. Use required_conan_version='>=2.28' to activate it
+spng/0.7.4@ysm/stable: WARN: risk: Transitive dependencies with 'headers=False' effect in 'package_id' is not necessary and suboptimal. Use required_conan_version='>=2.28' to activate it
+avif/1.4.2@ysm/stable: Main binary package 'd4d0ddf2e252c7169004f9e954279aef249efead' missing
+avif/1.4.2@ysm/stable: Checking 13 compatible configurations
+avif/1.4.2@ysm/stable: Compatible configurations not found in cache, checking servers
+avif/1.4.2@ysm/stable: Found 0 compatible configurations in remotes
+avif/1.4.2@ysm/stable: No compatible configuration found
+jpeg-turbo/3.2.0@ysm/stable: Main binary package '7ba56ccf79968a12acf67b3b4d62d43fd4af4190' missing
+jpeg-turbo/3.2.0@ysm/stable: Checking 13 compatible configurations
+jpeg-turbo/3.2.0@ysm/stable: Compatible configurations not found in cache, checking servers
+jpeg-turbo/3.2.0@ysm/stable: Found 0 compatible configurations in remotes
+jpeg-turbo/3.2.0@ysm/stable: No compatible configuration found
+minizip-ng/4.2.2@ysm/stable: Main binary package '7ba56ccf79968a12acf67b3b4d62d43fd4af4190' missing
+minizip-ng/4.2.2@ysm/stable: Checking 13 compatible configurations
+minizip-ng/4.2.2@ysm/stable: Compatible configurations not found in cache, checking servers
+minizip-ng/4.2.2@ysm/stable: Found 0 compatible configurations in remotes
+minizip-ng/4.2.2@ysm/stable: No compatible configuration found
+re2/2025-11-05@ysm/stable: Main binary package 'e18b31f05f169400fd31d08e73a4f51774dfd349' missing
+re2/2025-11-05@ysm/stable: Checking 13 compatible configurations
+re2/2025-11-05@ysm/stable: Compatible configurations not found in cache, checking servers
+re2/2025-11-05@ysm/stable: Found 0 compatible configurations in remotes
+re2/2025-11-05@ysm/stable: No compatible configuration found
+spng/0.7.4@ysm/stable: Main binary package '7ba56ccf79968a12acf67b3b4d62d43fd4af4190' missing
+spng/0.7.4@ysm/stable: Checking 13 compatible configurations
+spng/0.7.4@ysm/stable: Compatible configurations not found in cache, checking servers
+spng/0.7.4@ysm/stable: Found 0 compatible configurations in remotes
+spng/0.7.4@ysm/stable: No compatible configuration found
+vorbis/1.3.7@ysm/stable: Main binary package 'ea472a8e26abe1c94a99a216d73dc99ec5c81d74' missing
+vorbis/1.3.7@ysm/stable: Checking 13 compatible configurations
+vorbis/1.3.7@ysm/stable: Compatible configurations not found in cache, checking servers
+vorbis/1.3.7@ysm/stable: Found 0 compatible configurations in remotes
+vorbis/1.3.7@ysm/stable: No compatible configuration found
+googletest/1.18.0@ysm/stable: WARN: risk: Transitive dependencies with 'headers=False' effect in 'package_id' is not necessary and suboptimal. Use required_conan_version='>=2.28' to activate it
+googletest/1.18.0@ysm/stable: Main binary package '4c4bbda58b6cd6dc30c33f982d92ea1aee610726' missing
+googletest/1.18.0@ysm/stable: Checking 13 compatible configurations
+googletest/1.18.0@ysm/stable: Compatible configurations not found in cache, checking servers
+googletest/1.18.0@ysm/stable: Found 0 compatible configurations in remotes
+googletest/1.18.0@ysm/stable: No compatible configuration found
+Requirements
+    abseil/20260817.0@ysm/stable#a4fd45cfdf7ad4f643ba9f4c096d2bba:7cc1b46249661d8613b8fee9d277f0e7b9e3fe36 - Build
+    avif/1.4.2@ysm/stable#c44aa0397a83bb3596a3063fedb2eb5e:d4d0ddf2e252c7169004f9e954279aef249efead - Build
+    blake3/1.8.7@ysm/stable#7fc9f889aa64fdeff645600a9b6236ef:ac0daf7c31732d4ddc1c01e7fd633df2f90e7963 - Build
+    cglm/0.9.7@ysm/stable#be24e7c9533353331333601812d12a5f:da39a3ee5e6b4b0d3255bfef95601890afd80709 - Build
+    cpu_features/0.11.0@ysm/stable#18b053dc456cfe3a612d9a4a63e1a669:ac0daf7c31732d4ddc1c01e7fd633df2f90e7963 - Build
+    cryptopp/8.9.0@ysm/stable#45925fe251f5fe8b5c71d18a4c965abd:26258110b32b494b8dfa494ba3cae6decf324f4a - Build
+    dav1d/1.5.4@ysm/stable#8c955db71f789351d991ea42683efcc0:900e4c862c94d1cecb0394759386c338048fe85b - Build
+    jni/8.0.0@ysm/stable#9f4530e8e01a0a5de2ba003a34414708:da39a3ee5e6b4b0d3255bfef95601890afd80709 - Build
+    jpeg-turbo/3.2.0@ysm/stable#860f46ab069c72b9174fd81684878ed4:7ba56ccf79968a12acf67b3b4d62d43fd4af4190 - Build
+    lzma/26.02@ysm/stable#66a331571effde6d666bbe403ba07436:900e4c862c94d1cecb0394759386c338048fe85b - Build
+    magic_enum/0.9.8@ysm/stable#ec48e66848cda314c9111129cb20c355:da39a3ee5e6b4b0d3255bfef95601890afd80709 - Build
+    mimalloc/3.6.0@ysm/stable#4c9c76dc1f7c8cf8b7f7bf1c43cfbf45:ac0daf7c31732d4ddc1c01e7fd633df2f90e7963 - Build
+    minizip-ng/4.2.2@ysm/stable#b817e2cbd29c38f999e84611816e513f:7ba56ccf79968a12acf67b3b4d62d43fd4af4190 - Build
+    ogg/1.3.6@ysm/stable#80ca4d8ef55d63519891068435b9d8e3:900e4c862c94d1cecb0394759386c338048fe85b - Build
+    optional_ref/0.3.1@ysm/stable#e70771c2be03d3271a86457d9c89f866:da39a3ee5e6b4b0d3255bfef95601890afd80709 - Build
+    opus/1.6.1@ysm/stable#ddd78ef41cd2a6a152396092441cc1d1:900e4c862c94d1cecb0394759386c338048fe85b - Build
+    proxy/4.1.0@ysm/stable#0a04a14ceed744c7d99d26fb7b2f051f:da39a3ee5e6b4b0d3255bfef95601890afd80709 - Build
+    pystring/1.2.0@ysm/stable#c635d532f0e40f33e1cb7dacc65ef5c8:ac0daf7c31732d4ddc1c01e7fd633df2f90e7963 - Build
+    speexdsp/1.2.1@ysm/stable#49a0103da30234976fa067dabcfe8f47:900e4c862c94d1cecb0394759386c338048fe85b - Build
+    spng/0.7.4@ysm/stable#147b9d09248c85a2795dc4d9ec73ea88:7ba56ccf79968a12acf67b3b4d62d43fd4af4190 - Build
+    svt-av1/4.2.0@ysm/stable#68b0d3449ebd12c79df8add5dc52d77b:900e4c862c94d1cecb0394759386c338048fe85b - Build
+    tracy/0.14.1@ysm/stable#1ca9b2b2d1aba6f0ad56fb9d38a1e5f9:7cc1b46249661d8613b8fee9d277f0e7b9e3fe36 - Build
+    vorbis/1.3.7@ysm/stable#d3af124cec162e248cf8c209f2999c5a:ea472a8e26abe1c94a99a216d73dc99ec5c81d74 - Build
+    webp/1.6.0@ysm/stable#2edb7a34db59c8cd32a24f568d9992ac:900e4c862c94d1cecb0394759386c338048fe85b - Build
+    yalantinglibs/0.6.1@ysm/stable#f7147a2a0bc76f5eff1e20d589278220:900e4c862c94d1cecb0394759386c338048fe85b - Build
+    yuv/0.0.1974@ysm/stable#c37fe87acd6aa988294bb20b9477f974:900e4c862c94d1cecb0394759386c338048fe85b - Build
+    zlib-ng/2.3.3@ysm/stable#05f18a7d8a7285b9d75a8975d0a823d5:900e4c862c94d1cecb0394759386c338048fe85b - Build
+    zstd/1.5.7@ysm/stable#eaa8aead451a165b8c41058c130223f5:900e4c862c94d1cecb0394759386c338048fe85b - Build
+Test requirements
+    benchmark/1.10.0@ysm/stable#f36ae508b467db9acc0c1b156890508f:ac0daf7c31732d4ddc1c01e7fd633df2f90e7963 - Build
+    googletest/1.18.0@ysm/stable#d142fdd8bc8e66980a865111c5a3ad62:4c4bbda58b6cd6dc30c33f982d92ea1aee610726 - Build
+    re2/2025-11-05@ysm/stable#a28dab621f464a93c427777a36011bbe:e18b31f05f169400fd31d08e73a4f51774dfd349 - Build
+
+======== Installing packages ========
+
+-------- Installing package benchmark/1.10.0@ysm/stable (1 of 31) --------
+Building from source benchmark/1.10.0@ysm/stable:ac0daf7c31732d4ddc1c01e7fd633df2f90e7963
+benchmark/1.10.0@ysm/stable: settings: os=Windows arch=x86_64 compiler=clang compiler.cppstd=23 compiler.runtime=static compiler.runtime_type=Release compiler.runtime_version=v143 compiler.version=20 build_type=Release
+benchmark/1.10.0@ysm/stable: options: fPIC=True
+benchmark/1.10.0@ysm/stable: python_requires: ysm_dependency_base/0.1.Z@ysm/stable
+benchmark/1.10.0@ysm/stable: conf: user.ysm:rev=2026.10.27.2 user.toolchain:rev=undefined
+>>> Source step
+Getting sources for benchmark/1.10.0@ysm/stable
+Calling source() in D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\benchfd37255d9d7c4\s\src
+Cloning git repo
+RUN: git clone "<hidden>" --depth 1 -b v1.10.0 "."
+Copying sources to build folder
+Sources in D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\b\benchcc9c7fbfc6e3a\b\src
+>>> Generate step for benchmark/1.10.0@ysm/stable
+Generators folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\b\benchcc9c7fbfc6e3a\b\build\Release\generators
+Calling generate() method in recipe
+WARN: Toolchain: Ignoring fPIC option defined for Windows
+CMakeToolchain generated: conan_toolchain.cmake
+CMakeToolchain generated: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\b\benchcc9c7fbfc6e3a\b\build\Release\generators\CMakePresets.json
+CMakeToolchain generated: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\b\benchcc9c7fbfc6e3a\b\src\CMakeUserPresets.json
+Generating aggregated env files
+Generated aggregated env files: ['conanbuild.bat', 'conanrun.bat']
+Building your package in D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\b\benchcc9c7fbfc6e3a\b
+>>> Build step for benchmark/1.10.0@ysm/stable
+Calling build()
+Running CMake.configure()
+RUN: cmake -G "Ninja" -DCMAKE_TOOLCHAIN_FILE="generators/conan_toolchain.cmake" -DCMAKE_INSTALL_PREFIX="D:/a/YesSteveModel-Native/YesSteveModel-Native/conan/cache/p/b/benchcc9c7fbfc6e3a/p" -DCMAKE_POLICY_DEFAULT_CMP0091="NEW" -DCMAKE_BUILD_TYPE="Release" "D:/a/YesSteveModel-Native/YesSteveModel-Native/conan/cache/p/b/benchcc9c7fbfc6e3a/b/src"
+conanvcvars.bat: Activating environment Visual Studio 17 - amd64 - winsdk_version=None - vcvars_ver=14.3
+[ERROR:vcvars.bat] Toolset directory for version '14.3' was not found.
+[ERROR:VsDevCmd.bat] *** VsDevCmd.bat encountered errors. Environment may be incomplete and/or incorrect. ***
+[ERROR:VsDevCmd.bat] In an uninitialized command prompt, please 'set VSCMD_DEBUG=[value]' and then re-run
+[ERROR:VsDevCmd.bat] vsdevcmd.bat [args] for additional details.
+[ERROR:VsDevCmd.bat] Where [value] is:
+[ERROR:VsDevCmd.bat]    1 : basic debug logging
+[ERROR:VsDevCmd.bat]    2 : detailed debug logging
+[ERROR:VsDevCmd.bat]    3 : trace level logging. Redirection of output to a file when using this level is recommended.
+[ERROR:VsDevCmd.bat] Example: set VSCMD_DEBUG=3
+[ERROR:VsDevCmd.bat]          vsdevcmd.bat > vsdevcmd.trace.txt 2>&1
+[ERROR] D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\b\benchcc9c7fbfc6e3a\b\build\Release\generators\/conanvcvars.bat failed with code 1
+
+ERROR: 
+Package 'ac0daf7c31732d4ddc1c01e7fd633df2f90e7963' build failed
+WARN: Build folder D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\b\benchcc9c7fbfc6e3a\b\build\Release
+ERROR: benchmark/1.10.0@ysm/stable: Error in build() method, line 144
+	cmake.configure(build_script_folder=self._source_cmake_dir())
+	ConanException: Error 1 while executing
