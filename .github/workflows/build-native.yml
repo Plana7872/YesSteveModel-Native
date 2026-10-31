@@ -94,6 +94,7 @@ jobs:
             'build_type=Release',
             'compiler=clang',
             "compiler.version=$($env:YSM_CLANG_MAJOR)",
+            'compiler.runtime_version=v144',
             'compiler.cppstd=23',
             'compiler.runtime=static',
             'compiler.runtime_type=Release',
