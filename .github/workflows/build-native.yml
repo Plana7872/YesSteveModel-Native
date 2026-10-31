@@ -72,14 +72,20 @@ jobs:
           echo ls-remote=%ERRORLEVEL% >> "diagnostics\git.log"
           git clone --depth 1 -b v1.10.0 https://github.com/google/benchmark "%RUNNER_TEMP%\probe-benchmark" >> "diagnostics\git.log" 2>&1
           echo clone-benchmark=%ERRORLEVEL% >> "diagnostics\git.log"
-          git clone --depth 1 https://github.com/google/googletest "%RUNNER_TEMP%\probe-gtest" >> "diagnostics\git.log" 2>&1
-          echo clone-gtest=%ERRORLEVEL% >> "diagnostics\git.log"
           type "diagnostics\git.log"
 
-      - name: conan home
+      - name: setup
+        shell: cmd
+        run: |
+          set CONAN_HOME=%CD%\conan\cache
+          if not exist diagnostics mkdir diagnostics
+          call bootstrap.cmd setup > "diagnostics\setup.log" 2>&1
+          if errorlevel 1 ( exit /b 1 )
+
+      - name: profile
         shell: pwsh
         run: |
-          $ErrorActionPreference = 'Continue'
+          $ErrorActionPreference = 'Stop'
           $PSNativeCommandUseErrorActionPreference = $false
           $log = 'diagnostics/conan.log'
           function w($m) { "$((Get-Date).ToString('HH:mm:ss')) $m" | Add-Content $log }
@@ -104,6 +110,7 @@ jobs:
           )
           $profile = Join-Path $home 'profiles\default'
           [IO.File]::WriteAllLines($profile, $lines)
+          w "wrote $profile"
           & $env:YSM_CONAN profile show -pr default *>&1 | Add-Content $log
           w "profile show exit=$LASTEXITCODE"
 
@@ -111,10 +118,7 @@ jobs:
         shell: cmd
         run: |
           set CONAN_HOME=%CD%\conan\cache
-          mkdir diagnostics 2>nul
-          call bootstrap.cmd setup > diagnostics\setup.log 2>&1
-          if errorlevel 1 ( exit /b 1 )
-          call bootstrap.cmd build native > diagnostics\build.log 2>&1
+          call bootstrap.cmd build native > "diagnostics\build.log" 2>&1
           if errorlevel 1 ( exit /b 1 )
 
       - uses: actions/upload-artifact@v4
