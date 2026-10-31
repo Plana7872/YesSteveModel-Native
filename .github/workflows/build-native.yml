@@ -34,7 +34,7 @@ jobs:
             Where-Object { Test-Path (Join-Path $_ 'clang-cl.exe') } | Select-Object -First 1
           if (-not $llvm) { throw 'clang-cl.exe not found under the known LLVM directories' }
           $llvm | Out-File $env:GITHUB_PATH -Append -Encoding utf8
-          "CC=clang-cl`nCXX=clang-cl`nCFLAGS=-fuse-ld=lld`nCXXFLAGS=-fuse-ld=lld" |
+          "CC=clang-cl`nCXX=clang-cl`nCFLAGS=-fuse-ld=lld`nCXXFLAGS=-fuse-ld=lld`nLDFLAGS=-fuse-ld=lld" |
             Out-File $env:GITHUB_ENV -Append -Encoding utf8
           $banner = (& (Join-Path $llvm 'clang-cl.exe') --version | Select-Object -First 1)
           $major = [regex]::Match($banner, '\d+').Value
@@ -105,6 +105,15 @@ jobs:
           type "%P%" >> "diagnostics\conan.log"
           conan profile show -pr default >> "diagnostics\conan.log" 2>&1
           echo profile-show=%ERRORLEVEL% >> "diagnostics\conan.log"
+
+      - name: patch flags
+        shell: cmd
+        run: |
+          python -c "import pathlib;p=pathlib.Path('conan/cmake/targets/windows-x64.cmake');s=p.read_text();before=len(s);s=s.replace('        -funique-source-file-names\n','').replace('        -fsplit-lto-unit\n','').replace('        -fwhole-program-vtables\n','').replace('        -fforce-emit-vtables\n','');p.write_text(s);print('patched',before,'->',len(s));print(s)" > "diagnostics\patch.log" 2>&1
+          set RC=%ERRORLEVEL%
+          type "diagnostics\patch.log"
+          if not "%RC%"=="0" exit /b 1
+
 
       - name: build
         shell: cmd
