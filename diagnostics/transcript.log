@@ -1,0 +1,26 @@
+**********************
+PowerShell transcript start
+Start time: 20261031173910
+Username: runnervmnjgfq\runneradmin
+RunAs User: runnervmnjgfq\runneradmin
+Configuration Name: 
+Machine: runnervmnjgfq (Microsoft Windows NT 10.0.20348.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -command . 'D:\a\_temp\31ea95d3-5bf1-4c4c-9d3e-a129ebe18770.ps1'
+Process ID: 5896
+PSVersion: 7.6.9
+PSEdition: Core
+GitCommitId: 7.6.9
+OS: Microsoft Windows 10.0.20348
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+clang version 20.1.8
+
+
+**********************
+PowerShell transcript end
+End time: 20261031173928
+**********************
