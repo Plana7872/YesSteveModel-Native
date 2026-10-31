@@ -1,36 +1,3 @@
-# Build the YSM native core (ysm.dll) on GitHub's Windows runner.
-#
-# Why: the native core lives in the separate YesSteveModel/YesSteveModel-Native
-# repository and has no published binaries and no CI of its own. A local build
-# needs Visual Studio 2022 with the C++ workload, which not every machine has.
-# windows-2022 runners ship MSVC + Windows SDK + LLVM, so the whole thing can be
-# built in the cloud for free and downloaded as an artifact.
-#
-# Usage: copy this file into a fork of YesSteveModel-Native as
-#   .github/workflows/build-native.yml
-# then Actions -> build-native -> Run workflow, and download the
-# "ysm-dll-windows-x64" artifact when it finishes.
-#
-# The compiler is clang-cl, not plain MSVC, and that is deliberate:
-# modules/gfx compiles one template body per SIMD level (SSE4.1 / AVX2 / AVX512)
-# with __attribute__((target(...))) function multiversioning, which MSVC does
-# not implement (its cpu.h branch even forgets YSM_TARGET_SSE41). clang-cl is
-# also what docs/official-build-environment_cn.md uses. ThinLTO therefore needs
-# lld-link, so -fuse-ld=lld is handed to clang through CFLAGS/CXXFLAGS.
-#
-# Notes learned the hard way:
-# - NASM is fetched as the official release zip and put on PATH through
-#   GITHUB_PATH. The Chocolatey package runs the vendor NSIS installer, which
-#   never refreshes the PATH of the running step, so it is only the fallback.
-# - CONAN_HOME must point at the repo-local conan/cache: bootstrap.cmd sets it
-#   the same way, and the detected profile + exported recipes live there.
-# - The host profile is written by hand instead of `conan profile detect`,
-#   because detection picks MSVC. bootstrap.cmd only runs `detect -e`, so an
-#   existing default profile is left alone.
-# - Every step tees its output into diagnostics/, and a failure-only step
-#   republishes the tail as annotations plus a diagnostics/run-N branch: the
-#   Actions log itself needs a token to read, annotations do not.
-
 name: build-native
 
 on:
@@ -42,115 +9,100 @@ permissions:
   contents: write
 
 jobs:
-  windows-x64:
+  build:
     runs-on: windows-2022
     timeout-minutes: 300
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Enable the MSVC x64 environment
-        uses: ilammy/msvc-dev-cmd@v1
+      - uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: x64
 
-      - name: Ensure LLVM clang-cl
+      - name: toolchain
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
           New-Item -ItemType Directory -Force -Path diagnostics | Out-Null
-          $log = 'diagnostics/llvm.log'
-          $dir = 'C:\Program Files\LLVM\bin'
-          if (-not (Test-Path (Join-Path $dir 'clang-cl.exe'))) {
-            "LLVM not present in $dir; installing with Chocolatey" | Tee-Object -FilePath $log -Append
-            choco install llvm -y --no-progress 2>&1 | Tee-Object -FilePath $log -Append
-            $machine = [Environment]::GetEnvironmentVariable('Path', 'Machine')
-            $user = [Environment]::GetEnvironmentVariable('Path', 'User')
-            $env:Path = "$machine;$user"
-          }
-          if (-not (Test-Path (Join-Path $dir 'clang-cl.exe'))) { throw "clang-cl.exe still missing under $dir" }
-          $env:Path = "$dir;$env:Path"
-          $dir | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
-          "CC=clang-cl" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
-          "CXX=clang-cl" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
-          "CFLAGS=-fuse-ld=lld" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
-          "CXXFLAGS=-fuse-ld=lld" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
-          & clang-cl --version 2>&1 | Tee-Object -FilePath $log -Append
-          & lld-link --version 2>&1 | Tee-Object -FilePath $log -Append
-
-      - name: Install NASM
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = 'Stop'
-          New-Item -ItemType Directory -Force -Path diagnostics | Out-Null
-          $log = 'diagnostics/nasm-install.log'
-          $ProgressPreference = 'SilentlyContinue'
-          $zip = Join-Path $env:RUNNER_TEMP 'nasm.zip'
-          $url = 'https://www.nasm.us/pub/nasm/releasebuilds/2.16.03/win64/nasm-2.16.03-win64.zip'
-          try {
-            Invoke-WebRequest -Uri $url -OutFile $zip
-            Expand-Archive -Path $zip -DestinationPath (Join-Path $env:RUNNER_TEMP 'nasm') -Force
-            $exe = Get-ChildItem (Join-Path $env:RUNNER_TEMP 'nasm') -Recurse -Filter nasm.exe |
-                     Select-Object -First 1
-            if (-not $exe) { throw 'nasm.exe missing from the release zip' }
-            $exe.DirectoryName | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
-            $env:Path = "$($exe.DirectoryName);$env:Path"
-            "nasm from $url -> $($exe.DirectoryName)" | Tee-Object -FilePath $log -Append
-          } catch {
-            "release zip failed: $_ ; falling back to Chocolatey" | Tee-Object -FilePath $log -Append
-            choco install nasm -y --no-progress 2>&1 | Tee-Object -FilePath $log -Append
-            $machine = [Environment]::GetEnvironmentVariable('Path', 'Machine')
-            $user = [Environment]::GetEnvironmentVariable('Path', 'User')
-            $env:Path = "$machine;$user"
-          }
-          if (-not (Get-Command nasm -ErrorAction SilentlyContinue)) {
-            "nasm still not on PATH" | Tee-Object -FilePath $log -Append
-            throw 'nasm still not on PATH after install'
-          }
-          nasm -v 2>&1 | Tee-Object -FilePath $log -Append
-
-      - name: Install Conan, CMake and Ninja
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = 'Stop'
-          New-Item -ItemType Directory -Force -Path diagnostics | Out-Null
-          $log = 'diagnostics/python-tools.log'
-          python -m pip install --upgrade "conan>=2.28" "cmake>=3.29" ninja 2>&1 |
-            Tee-Object -FilePath $log -Append
-          if ($LASTEXITCODE -ne 0) { throw "pip install failed ($LASTEXITCODE)" }
-          python -m pip show conan 2>&1 | Select-String -Pattern '^Version' | Tee-Object -FilePath $log -Append
-          cmake --version 2>&1 | Tee-Object -FilePath $log -Append
-          ninja --version 2>&1 | Tee-Object -FilePath $log -Append
-          conan --version 2>&1 | Tee-Object -FilePath $log -Append
-
-      - name: Write the clang-cl Conan profile in the repo-local cache
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = 'Stop'
-          New-Item -ItemType Directory -Force -Path diagnostics | Out-Null
-          $log = 'diagnostics/conan-profile.log'
+          $env:Path = "C:\Program Files\LLVM\bin;$env:Path"
+          "C:\Program Files\LLVM\bin" | Out-File $env:GITHUB_PATH -Append -Encoding utf8
+          "CC=clang-cl`nCXX=clang-cl`nCFLAGS=-fuse-ld=lld`nCXXFLAGS=-fuse-ld=lld" |
+            Out-File $env:GITHUB_ENV -Append -Encoding utf8
+          $zip = Join-Path $env:RUNNER_TEMP nasm.zip
+          Invoke-WebRequest 'https://www.nasm.us/pub/nasm/releasebuilds/2.16.03/win64/nasm-2.16.03-win64.zip' -OutFile $zip
+          Expand-Archive $zip (Join-Path $env:RUNNER_TEMP nasm) -Force
+          $n = (Get-ChildItem (Join-Path $env:RUNNER_TEMP nasm) -Recurse -Filter nasm.exe |
+                  Select-Object -First 1).DirectoryName
+          $n | Out-File $env:GITHUB_PATH -Append -Encoding utf8
+          $env:Path = "$n;$env:Path"
+          python -m pip install --upgrade "conan>=2.28" "cmake>=3.29" ninja
+          if ($LASTEXITCODE -ne 0) { throw 'pip install failed' }
           $env:CONAN_HOME = Join-Path $PWD 'conan\cache'
-          New-Item -ItemType Directory -Force -Path (Join-Path $env:CONAN_HOME 'profiles') | Out-Null
+          New-Item -ItemType Directory -Force (Join-Path $env:CONAN_HOME 'profiles') | Out-Null
+          $v = [int]([regex]::Match((clang-cl --version)[0], '\d+').Value)
+          foreach ($c in @($v, $v - 1, $v - 2, 20, 19, 18, 17) | Select-Object -Unique) {
+            $profile = @(
+              '[settings]',
+              'os=Windows',
+              'arch=x86_64',
+              'build_type=Release',
+              'compiler=clang',
+              "compiler.version=$c",
+              'compiler.cppstd=23',
+              'compiler.runtime=static',
+              'compiler.runtime_type=Release',
+              '',
+              '[conf]',
+              'tools.build:compiler_executables={"c": "clang-cl", "cpp": "clang-cl"}'
+            )
+            Set-Content (Join-Path $env:CONAN_HOME 'profiles\default') -Value $profile -Encoding utf8
+            conan profile show -pr default *> diagnostics\conan-profile.log
+            if ($LASTEXITCODE -eq 0) { break }
+          }
+          conan profile show -pr default
+          nasm -v
+          clang-cl --version | Select-Object -First 1
+          conan --version
 
-          $banner = (& clang-cl --version) | Select-Object -First 1
-          $detected = [int]([regex]::Match($banner, 'version\s+(\d+)')).Groups[1].Value
-          "detected: $banner -> major $detected" | Tee-Object -FilePath $log -Append
+      - name: bootstrap setup
+        shell: cmd
+        run: |
+          set CONAN_HOME=%CD%\conan\cache
+          mkdir diagnostics 2>nul
+          call bootstrap.cmd setup > diagnostics\setup.log 2>&1
+          set RC=%ERRORLEVEL%
+          type diagnostics\setup.log
+          if not %RC%==0 exit /b %RC%
 
-          $candidates = @($detected, $detected - 1, $detected - 2, 20, 19, 18, 17, 16, 15) |
-                          Where-Object { $_ -ge 15 } | Select-Object -Unique
-          $chosen = $null
-          foreach ($candidate in $candidates) {
-            $text = @"
-[settings]
-os=Windows
-arch=x86_64
-build_type=Release
-compiler=clang
-compiler.version=$candidate
-compiler.cppstd=23
-compiler.runtime=static
-compiler.runtime_type=Release
+      - name: bootstrap build
+        shell: cmd
+        run: |
+          set CONAN_HOME=%CD%\conan\cache
+          mkdir diagnostics 2>nul
+          call bootstrap.cmd build native > diagnostics\build.log 2>&1
+          set RC=%ERRORLEVEL%
+          type diagnostics\build.log
+          if not %RC%==0 exit /b %RC%
 
-[conf]
-tools.build:compiler_executables={"c": "clang-cl", "cpp": "clang-cl"}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ysm-dll-windows-x64
+          path: "**/ysm.dll"
+          if-no-files-found: error
+
+      - name: publish logs
+        if: failure()
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force diagnostics | Out-Null
+          Get-ChildItem diagnostics -Filter *.log -ErrorAction SilentlyContinue | ForEach-Object {
+            Write-Host "::group:: $($_.Name)"
+            Get-Content $_.FullName -Tail 40 | ForEach-Object { Write-Host ('::error::' + $_.Replace('%', '%25')) }
+            Write-Host '::endgroup::'
+          }
+          git config user.name ysm-ci
+          git config user.email ysm-ci@users.noreply.github.com
+          git add -f diagnostics
+          git commit -m "diagnostics $env:GITHUB_RUN_NUMBER"
+          git push --force origin "HEAD:diagnostics/run-$env:GITHUB_RUN_NUMBER"
+
