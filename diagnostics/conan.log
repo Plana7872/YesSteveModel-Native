@@ -1,0 +1,27 @@
+[settings]
+Host profile:
+arch=x86_64
+build_type=Release
+compiler=clang
+compiler.cppstd=23
+compiler.runtime=static
+compiler.runtime_type=Release
+compiler.version=20
+os=Windows
+[conf]
+tools.build:compiler_executables={'c': 'clang-cl', 'cpp': 'clang-cl'}
+
+[settings]
+arch=x86_64
+build_type=Release
+compiler=clang
+compiler.cppstd=23
+compiler.runtime=static
+compiler.runtime_type=Release
+compiler.version=20
+os=Windows
+[conf]
+tools.build:compiler_executables={'c': 'clang-cl', 'cpp': 'clang-cl'}
+
+Build profile:
+18:28:58 profile show exit=0

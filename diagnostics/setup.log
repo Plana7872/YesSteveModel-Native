@@ -1,0 +1,342 @@
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\base-recipe" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+ysm_dependency_base/0.1@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\base-recipe\conanfile.py
+Copied 1 '.py' file: conanfile.py
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\ysm_d8d082a04d283a\e
+Exported: ysm_dependency_base/0.1@ysm/stable#dea8b5ada93e9f4bc4015a5274e55a17 (2026-10-31 18:28:58 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\abseil" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+abseil/20260817.0@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\abseil\conanfile.py
+abseil/20260817.0@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 2 '.patch' files: 20260817.0-0001-android-identity.patch, 20260817.0-0002-sysinfo-mimalloc.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\abseiaca4c196486d5\e
+Exported: abseil/20260817.0@ysm/stable#a4fd45cfdf7ad4f643ba9f4c096d2bba (2026-10-31 18:28:59 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\avif" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+avif/1.4.2@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\avif\conanfile.py
+avif/1.4.2@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 2 '.patch' files: avif-mimalloc.patch, avif.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\avif78fab5e16246c\e
+Exported: avif/1.4.2@ysm/stable#c44aa0397a83bb3596a3063fedb2eb5e (2026-10-31 18:28:59 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\benchmark" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+benchmark/1.10.0@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\benchmark\conanfile.py
+benchmark/1.10.0@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\benchfd37255d9d7c4\e
+Exported: benchmark/1.10.0@ysm/stable#f36ae508b467db9acc0c1b156890508f (2026-10-31 18:29:00 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\blake3" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+blake3/1.8.7@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\blake3\conanfile.py
+blake3/1.8.7@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\blakeca0109d8bd57e\e
+Exported: blake3/1.8.7@ysm/stable#7fc9f889aa64fdeff645600a9b6236ef (2026-10-31 18:29:00 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\cglm" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+cglm/0.9.7@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\cglm\conanfile.py
+cglm/0.9.7@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 2 '.patch' files: cglm-const-correctness.patch, cglm-mat4-align-64.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\cglm8ffcff366a76b\e
+Exported: cglm/0.9.7@ysm/stable#be24e7c9533353331333601812d12a5f (2026-10-31 18:29:00 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\cpu_features" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+cpu_features/0.11.0@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\cpu_features\conanfile.py
+cpu_features/0.11.0@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 1 '.patch' file: cpu_features.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\cpu_f37fdd3c63374c\e
+Exported: cpu_features/0.11.0@ysm/stable#18b053dc456cfe3a612d9a4a63e1a669 (2026-10-31 18:29:01 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\cryptopp" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+cryptopp/8.9.0@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\cryptopp\conanfile.py
+cryptopp/8.9.0@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 3 '.patch' files: cmake-entry.patch, cryptopp-cmake.patch, cryptopp.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\cryptbe41ba6710402\e
+Exported: cryptopp/8.9.0@ysm/stable#45925fe251f5fe8b5c71d18a4c965abd (2026-10-31 18:29:01 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\dav1d" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+dav1d/1.5.4@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\dav1d\conanfile.py
+dav1d/1.5.4@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 1 '.patch' file: dav1d.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\dav1dfd4e1740959d1\e
+Exported: dav1d/1.5.4@ysm/stable#8c955db71f789351d991ea42683efcc0 (2026-10-31 18:29:02 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\googletest" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+googletest/1.18.0@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\googletest\conanfile.py
+googletest/1.18.0@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\googl0e025558a6eb3\e
+Exported: googletest/1.18.0@ysm/stable#d142fdd8bc8e66980a865111c5a3ad62 (2026-10-31 18:29:02 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\jni" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+jni/8.0.0@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\jni\conanfile.py
+jni/8.0.0@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 4 '.h' files: jni.h, jni_md.h, jni_md.h, jni_md.h
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\jni0025f81aa0386\e
+Exported: jni/8.0.0@ysm/stable#9f4530e8e01a0a5de2ba003a34414708 (2026-10-31 18:29:03 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\jpeg-turbo" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+jpeg-turbo/3.2.0@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\jpeg-turbo\conanfile.py
+jpeg-turbo/3.2.0@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 2 '.patch' files: jpeg-turbo-mimalloc.patch, jpeg-turbo.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\jpeg-ff0696c6f6093\e
+Exported: jpeg-turbo/3.2.0@ysm/stable#860f46ab069c72b9174fd81684878ed4 (2026-10-31 18:29:03 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\lzma" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+lzma/26.02@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\lzma\conanfile.py
+lzma/26.02@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 1 '.patch' file: lzma.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\lzmae1207052e41a2\e
+Exported: lzma/26.02@ysm/stable#66a331571effde6d666bbe403ba07436 (2026-10-31 18:29:03 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\magic_enum" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+magic_enum/0.9.8@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\magic_enum\conanfile.py
+magic_enum/0.9.8@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\magicaf008b9f0ad62\e
+Exported: magic_enum/0.9.8@ysm/stable#ec48e66848cda314c9111129cb20c355 (2026-10-31 18:29:04 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\mimalloc" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+mimalloc/3.6.0@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\mimalloc\conanfile.py
+mimalloc/3.6.0@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 1 '.patch' file: mimalloc-android-identity.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\mimal79e1927786487\e
+Exported: mimalloc/3.6.0@ysm/stable#4c9c76dc1f7c8cf8b7f7bf1c43cfbf45 (2026-10-31 18:29:04 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\minizip-ng" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+minizip-ng/4.2.2@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\minizip-ng\conanfile.py
+minizip-ng/4.2.2@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 2 '.patch' files: minizip-ng-mimalloc.patch, minizip-ng.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\miniz94fc4767a471a\e
+Exported: minizip-ng/4.2.2@ysm/stable#b817e2cbd29c38f999e84611816e513f (2026-10-31 18:29:05 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\ogg" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+ogg/1.3.6@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\ogg\conanfile.py
+ogg/1.3.6@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 1 '.patch' file: ogg.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\oggf70a66a70453e\e
+Exported: ogg/1.3.6@ysm/stable#80ca4d8ef55d63519891068435b9d8e3 (2026-10-31 18:29:05 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\optional_ref" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+optional_ref/0.3.1@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\optional_ref\conanfile.py
+optional_ref/0.3.1@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\optio62135a639a057\e
+Exported: optional_ref/0.3.1@ysm/stable#e70771c2be03d3271a86457d9c89f866 (2026-10-31 18:29:06 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\opus" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+opus/1.6.1@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\opus\conanfile.py
+opus/1.6.1@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 2 '.patch' files: opus-clang-cl-avx.patch, opus.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\opusd9845b01b07f4\e
+Exported: opus/1.6.1@ysm/stable#ddd78ef41cd2a6a152396092441cc1d1 (2026-10-31 18:29:06 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\proxy" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+proxy/4.1.0@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\proxy\conanfile.py
+proxy/4.1.0@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\proxy32c61c079595f\e
+Exported: proxy/4.1.0@ysm/stable#0a04a14ceed744c7d99d26fb7b2f051f (2026-10-31 18:29:06 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\pystring" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+pystring/1.2.0@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\pystring\conanfile.py
+pystring/1.2.0@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 1 '.patch' file: pystring-optional-tests.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\pystre11281e921f6a\e
+Exported: pystring/1.2.0@ysm/stable#c635d532f0e40f33e1cb7dacc65ef5c8 (2026-10-31 18:29:07 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\re2" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+re2/2025-11-05@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\re2\conanfile.py
+re2/2025-11-05@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\re2d1829d12d20fc\e
+Exported: re2/2025-11-05@ysm/stable#a28dab621f464a93c427777a36011bbe (2026-10-31 18:29:07 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\speexdsp" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+speexdsp/1.2.1@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\speexdsp\conanfile.py
+speexdsp/1.2.1@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 1 '.patch' file: speexdsp.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\speex47039238151d8\e
+Exported: speexdsp/1.2.1@ysm/stable#49a0103da30234976fa067dabcfe8f47 (2026-10-31 18:29:08 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\spng" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+spng/0.7.4@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\spng\conanfile.py
+spng/0.7.4@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 1 '.patch' file: spng.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\spng6572de139220e\e
+Exported: spng/0.7.4@ysm/stable#147b9d09248c85a2795dc4d9ec73ea88 (2026-10-31 18:29:08 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\svt-av1" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+svt-av1/4.2.0@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\svt-av1\conanfile.py
+svt-av1/4.2.0@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 2 '.patch' files: svt-av1-mimalloc.patch, svt-av1.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\svt-aef9a9f2d19fe6\e
+Exported: svt-av1/4.2.0@ysm/stable#68b0d3449ebd12c79df8add5dc52d77b (2026-10-31 18:29:09 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\tracy" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+tracy/0.14.1@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\tracy\conanfile.py
+tracy/0.14.1@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 1 '.patch' file: tracy-mimalloc.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\tracy4cf4035eef9eb\e
+Exported: tracy/0.14.1@ysm/stable#1ca9b2b2d1aba6f0ad56fb9d38a1e5f9 (2026-10-31 18:29:09 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\vorbis" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+vorbis/1.3.7@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\vorbis\conanfile.py
+vorbis/1.3.7@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 1 '.patch' file: vorbis.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\vorbi8d5fd681bbc0c\e
+Exported: vorbis/1.3.7@ysm/stable#d3af124cec162e248cf8c209f2999c5a (2026-10-31 18:29:09 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\webp" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+webp/1.6.0@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\webp\conanfile.py
+webp/1.6.0@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 2 '.patch' files: webp-clang-cl-simd.patch, webp.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\webp955651365082d\e
+Exported: webp/1.6.0@ysm/stable#2edb7a34db59c8cd32a24f568d9992ac (2026-10-31 18:29:10 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\yalantinglibs" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+yalantinglibs/0.6.1@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\yalantinglibs\conanfile.py
+yalantinglibs/0.6.1@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 5 '.patch' files
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\yalan580eacd1bc9e0\e
+Exported: yalantinglibs/0.6.1@ysm/stable#f7147a2a0bc76f5eff1e20d589278220 (2026-10-31 18:29:10 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\yuv" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+yuv/0.0.1974@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\yuv\conanfile.py
+yuv/0.0.1974@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 2 '.patch' files: yuv-static-only.patch, yuv.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\yuv8ca06abe3935d\e
+Exported: yuv/0.0.1974@ysm/stable#c37fe87acd6aa988294bb20b9477f974 (2026-10-31 18:29:11 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\zlib-ng" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+zlib-ng/2.3.3@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\zlib-ng\conanfile.py
+zlib-ng/2.3.3@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 1 '.patch' file: zlib-ng.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\zlib-bee6ffe0fda42\e
+Exported: zlib-ng/2.3.3@ysm/stable#05f18a7d8a7285b9d75a8975d0a823d5 (2026-10-31 18:29:11 UTC)
++ "conan" export "D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\zstd" --user=ysm --channel=stable
+
+======== Exporting recipe to the cache ========
+zstd/1.5.7@ysm/stable export
+Exporting package recipe: D:\a\YesSteveModel-Native\YesSteveModel-Native\third-party\zstd\conanfile.py
+zstd/1.5.7@ysm/stable: exports: File 'conandata.yml' found. Exporting it...
+Copied 1 '.yml' file: conandata.yml
+Copied 1 '.py' file: conanfile.py
+Copied 1 '.patch' file: zstd-mimalloc.patch
+Exported to cache folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\cache\p\zstd599202f6bedfe\e
+Exported: zstd/1.5.7@ysm/stable#eaa8aead451a165b8c41058c130223f5 (2026-10-31 18:29:12 UTC)
