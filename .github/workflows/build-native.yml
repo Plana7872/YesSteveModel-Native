@@ -119,8 +119,24 @@ jobs:
         shell: cmd
         run: |
           set CONAN_HOME=%CD%\conan\cache
+          call bootstrap.cmd build native --deps-only > "diagnostics\deps.log" 2>&1
+          if errorlevel 1 ( type "diagnostics\deps.log" & exit /b 1 )
+          > "diagpatch.py" echo import glob, pathlib
+          >> "diagpatch.py" echo hit = 0
+          >> "diagpatch.py" echo for f in glob.glob('conan/cache/p/*/p/include/proxy/v4/detail/compatibility_check.h'):
+          >> "diagpatch.py" echo     p = pathlib.Path(f)
+          >> "diagpatch.py" echo     s = p.read_text()
+          >> "diagpatch.py" echo     s2 = s.replace('#if __has_cpp_attribute(msvc::no_unique_address)', '#if 0')
+          >> "diagpatch.py" echo     if s2 != s:
+          >> "diagpatch.py" echo         p.write_text(s2)
+          >> "diagpatch.py" echo         hit += 1
+          >> "diagpatch.py" echo         print('patched', f)
+          >> "diagpatch.py" echo print('patched files', hit)
+          python diagpatch.py > "diagnostics\proxy.log" 2>&1
+          type "diagnostics\proxy.log"
           call bootstrap.cmd build native > "diagnostics\build.log" 2>&1
-          if errorlevel 1 ( exit /b 1 )
+          if errorlevel 1 exit /b 1
+          exit /b 0
 
       - uses: actions/upload-artifact@v4
         with:
