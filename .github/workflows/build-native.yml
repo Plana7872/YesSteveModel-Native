@@ -123,7 +123,9 @@ jobs:
           if errorlevel 1 ( type "diagnostics\deps.log" & exit /b 1 )
           > "diagpatch.py" echo import glob, pathlib
           >> "diagpatch.py" echo hit = 0
-          >> "diagpatch.py" echo for f in glob.glob('conan/cache/p/*/p/include/proxy/v4/detail/compatibility_check.h'):
+          >> "diagpatch.py" echo fs = glob.glob('conan/cache/**/compatibility_check.h', recursive=True)
+          >> "diagpatch.py" echo print('candidates', len(fs), fs[:5])
+          >> "diagpatch.py" echo for f in fs:
           >> "diagpatch.py" echo     p = pathlib.Path(f)
           >> "diagpatch.py" echo     s = p.read_text()
           >> "diagpatch.py" echo     s2 = s.replace('#if __has_cpp_attribute(msvc::no_unique_address)', '#if 0')
