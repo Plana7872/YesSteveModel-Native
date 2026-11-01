@@ -1,0 +1,566 @@
++ "conan" profile detect -e
+Profile 'default' already exists, skipping detection
++ "conan" build "D:\a\YesSteveModel-Native\YesSteveModel-Native" -pr:h default -pr:h "D:\a\YesSteveModel-Native\YesSteveModel-Native\conan\profile-override" -s:h compiler.runtime=static -pr:b default --no-remote --build=missing -s build_type=Release -c:h "user.target:profile=native" --core-conf core.graph:compatibility_mode=optimized
+
+======== Input profiles ========
+Profile host:
+[settings]
+arch=x86_64
+build_type=Release
+compiler=clang
+compiler.cppstd=23
+compiler.runtime=static
+compiler.runtime_type=Release
+compiler.runtime_version=v144
+compiler.version=20
+os=Windows
+[conf]
+tools.build:compiler_executables={'c': 'clang-cl', 'cpp': 'clang-cl'}
+tools.cmake.cmaketoolchain:generator=Ninja
+tools.cmake.cmaketoolchain:user_toolchain=['D:/a/YesSteveModel-Native/YesSteveModel-Native/conan/cmake/pre-setup.cmake']
+user.target:profile=native
+user.ysm:rev=2026.10.27.2
+
+Profile build:
+[settings]
+arch=x86_64
+build_type=Release
+compiler=clang
+compiler.cppstd=23
+compiler.runtime=static
+compiler.runtime_type=Release
+compiler.runtime_version=v144
+compiler.version=20
+os=Windows
+[conf]
+tools.build:compiler_executables={'c': 'clang-cl', 'cpp': 'clang-cl'}
+
+
+======== Computing dependency graph ========
+Graph root
+    conanfile.py (ysm/3.0): D:\a\YesSteveModel-Native\YesSteveModel-Native\conanfile.py
+Requirements
+    abseil/20260817.0@ysm/stable#a4fd45cfdf7ad4f643ba9f4c096d2bba - Cache
+    avif/1.4.2@ysm/stable#c44aa0397a83bb3596a3063fedb2eb5e - Cache
+    blake3/1.8.7@ysm/stable#7fc9f889aa64fdeff645600a9b6236ef - Cache
+    cglm/0.9.7@ysm/stable#be24e7c9533353331333601812d12a5f - Cache
+    cpu_features/0.11.0@ysm/stable#18b053dc456cfe3a612d9a4a63e1a669 - Cache
+    cryptopp/8.9.0@ysm/stable#45925fe251f5fe8b5c71d18a4c965abd - Cache
+    dav1d/1.5.4@ysm/stable#8c955db71f789351d991ea42683efcc0 - Cache
+    jni/8.0.0@ysm/stable#9f4530e8e01a0a5de2ba003a34414708 - Cache
+    jpeg-turbo/3.2.0@ysm/stable#860f46ab069c72b9174fd81684878ed4 - Cache
+    lzma/26.02@ysm/stable#66a331571effde6d666bbe403ba07436 - Cache
+    magic_enum/0.9.8@ysm/stable#ec48e66848cda314c9111129cb20c355 - Cache
+    mimalloc/3.6.0@ysm/stable#4c9c76dc1f7c8cf8b7f7bf1c43cfbf45 - Cache
+    minizip-ng/4.2.2@ysm/stable#b817e2cbd29c38f999e84611816e513f - Cache
+    ogg/1.3.6@ysm/stable#80ca4d8ef55d63519891068435b9d8e3 - Cache
+    optional_ref/0.3.1@ysm/stable#e70771c2be03d3271a86457d9c89f866 - Cache
+    opus/1.6.1@ysm/stable#ddd78ef41cd2a6a152396092441cc1d1 - Cache
+    proxy/4.1.0@ysm/stable#0a04a14ceed744c7d99d26fb7b2f051f - Cache
+    pystring/1.2.0@ysm/stable#c635d532f0e40f33e1cb7dacc65ef5c8 - Cache
+    speexdsp/1.2.1@ysm/stable#49a0103da30234976fa067dabcfe8f47 - Cache
+    spng/0.7.4@ysm/stable#147b9d09248c85a2795dc4d9ec73ea88 - Cache
+    svt-av1/4.2.0@ysm/stable#68b0d3449ebd12c79df8add5dc52d77b - Cache
+    tracy/0.14.1@ysm/stable#1ca9b2b2d1aba6f0ad56fb9d38a1e5f9 - Cache
+    vorbis/1.3.7@ysm/stable#d3af124cec162e248cf8c209f2999c5a - Cache
+    webp/1.6.0@ysm/stable#2edb7a34db59c8cd32a24f568d9992ac - Cache
+    yalantinglibs/0.6.1@ysm/stable#f7147a2a0bc76f5eff1e20d589278220 - Cache
+    yuv/0.0.1974@ysm/stable#c37fe87acd6aa988294bb20b9477f974 - Cache
+    zlib-ng/2.3.3@ysm/stable#05f18a7d8a7285b9d75a8975d0a823d5 - Cache
+    zstd/1.5.7@ysm/stable#eaa8aead451a165b8c41058c130223f5 - Cache
+Test requirements
+    benchmark/1.10.0@ysm/stable#f36ae508b467db9acc0c1b156890508f - Cache
+    googletest/1.18.0@ysm/stable#d142fdd8bc8e66980a865111c5a3ad62 - Cache
+    re2/2025-11-05@ysm/stable#a28dab621f464a93c427777a36011bbe - Cache
+Python requires
+    ysm_dependency_base/0.1@ysm/stable#dea8b5ada93e9f4bc4015a5274e55a17 - Cache
+
+======== Computing necessary packages ========
+re2/2025-11-05@ysm/stable: WARN: risk: Transitive dependencies with 'headers=False' effect in 'package_id' is not necessary and suboptimal. Use required_conan_version='>=2.28' to activate it
+spng/0.7.4@ysm/stable: WARN: risk: Transitive dependencies with 'headers=False' effect in 'package_id' is not necessary and suboptimal. Use required_conan_version='>=2.28' to activate it
+googletest/1.18.0@ysm/stable: WARN: risk: Transitive dependencies with 'headers=False' effect in 'package_id' is not necessary and suboptimal. Use required_conan_version='>=2.28' to activate it
+Requirements
+    abseil/20260817.0@ysm/stable#a4fd45cfdf7ad4f643ba9f4c096d2bba:c6a44f521e31f80f0d796ab37e5024d84f9a19ba#eef70b499479050831e4a664c9a4c536 - Cache
+    avif/1.4.2@ysm/stable#c44aa0397a83bb3596a3063fedb2eb5e:aec684dd0d2c4968722403440590ed4e2a581d32#fa7c2006abf9c75785cd39bba8dcecfb - Cache
+    blake3/1.8.7@ysm/stable#7fc9f889aa64fdeff645600a9b6236ef:4bde21b7b8e2157a563faa947bf5a33eda7fb760#f3102b6bd4c3a809b1a1921f566b8f9d - Cache
+    cglm/0.9.7@ysm/stable#be24e7c9533353331333601812d12a5f:da39a3ee5e6b4b0d3255bfef95601890afd80709#90b92e197e19eb59dbbab290729de55a - Cache
+    cpu_features/0.11.0@ysm/stable#18b053dc456cfe3a612d9a4a63e1a669:4bde21b7b8e2157a563faa947bf5a33eda7fb760#2aa3a4423886e3d1547d3a9b594032ac - Cache
+    cryptopp/8.9.0@ysm/stable#45925fe251f5fe8b5c71d18a4c965abd:1a1f5f44cefae3b20a3f82356b9d4c2926b54afa#0644848dade2ea7c792179941442b64e - Cache
+    dav1d/1.5.4@ysm/stable#8c955db71f789351d991ea42683efcc0:7dd2ca62642fcaffc30787bafde3925b75cd3e62#b154efebd52cc58fd5b389a85541f822 - Cache
+    jni/8.0.0@ysm/stable#9f4530e8e01a0a5de2ba003a34414708:da39a3ee5e6b4b0d3255bfef95601890afd80709#33a76405a8b22f65d55680795fc315ab - Cache
+    jpeg-turbo/3.2.0@ysm/stable#860f46ab069c72b9174fd81684878ed4:5659c56b23709549d3ab5077c22b2b9eeb3ad160#5bb6a6a33cf6b77e2255cb77708b41b3 - Cache
+    lzma/26.02@ysm/stable#66a331571effde6d666bbe403ba07436:7dd2ca62642fcaffc30787bafde3925b75cd3e62#51637d38a0e532fac5ce97b98bab9218 - Cache
+    magic_enum/0.9.8@ysm/stable#ec48e66848cda314c9111129cb20c355:da39a3ee5e6b4b0d3255bfef95601890afd80709#c8d8a35b6bd94db9b0b3d9308b859605 - Cache
+    mimalloc/3.6.0@ysm/stable#4c9c76dc1f7c8cf8b7f7bf1c43cfbf45:4bde21b7b8e2157a563faa947bf5a33eda7fb760#191066828247fe08b9cd8d4c683091cd - Cache
+    minizip-ng/4.2.2@ysm/stable#b817e2cbd29c38f999e84611816e513f:5659c56b23709549d3ab5077c22b2b9eeb3ad160#b53138f50705adb8fc25843861e6e087 - Cache
+    ogg/1.3.6@ysm/stable#80ca4d8ef55d63519891068435b9d8e3:7dd2ca62642fcaffc30787bafde3925b75cd3e62#b5ea8f17abbf06639854a569a2b9056b - Cache
+    optional_ref/0.3.1@ysm/stable#e70771c2be03d3271a86457d9c89f866:da39a3ee5e6b4b0d3255bfef95601890afd80709#3543953120b30ae03a6c12fb70177d88 - Cache
+    opus/1.6.1@ysm/stable#ddd78ef41cd2a6a152396092441cc1d1:7dd2ca62642fcaffc30787bafde3925b75cd3e62#64753d694c838d4e6f1b7e3694e5d5d0 - Cache
+    proxy/4.1.0@ysm/stable#0a04a14ceed744c7d99d26fb7b2f051f:da39a3ee5e6b4b0d3255bfef95601890afd80709#c2c08a4638b5e384465112ad74a7b6c1 - Cache
+    pystring/1.2.0@ysm/stable#c635d532f0e40f33e1cb7dacc65ef5c8:4bde21b7b8e2157a563faa947bf5a33eda7fb760#270b12e553319b7bcd7318e460637e83 - Cache
+    speexdsp/1.2.1@ysm/stable#49a0103da30234976fa067dabcfe8f47:7dd2ca62642fcaffc30787bafde3925b75cd3e62#af9776972ba4c0131ec02697c6a92d45 - Cache
+    spng/0.7.4@ysm/stable#147b9d09248c85a2795dc4d9ec73ea88:5659c56b23709549d3ab5077c22b2b9eeb3ad160#0d46ea78a016bd7fc7d977231042982b - Cache
+    svt-av1/4.2.0@ysm/stable#68b0d3449ebd12c79df8add5dc52d77b:7dd2ca62642fcaffc30787bafde3925b75cd3e62#0eeb6f030aaa7b639e2b8959c70733c3 - Cache
+    tracy/0.14.1@ysm/stable#1ca9b2b2d1aba6f0ad56fb9d38a1e5f9:c6a44f521e31f80f0d796ab37e5024d84f9a19ba#b4d5516c7fdd9fd8dc886b62ac3665d4 - Cache
+    vorbis/1.3.7@ysm/stable#d3af124cec162e248cf8c209f2999c5a:aa1f1e7ed316262b2a81ef77b30d8d7b7cc16535#6ead27a2a8102433aa83d6e2f0a80422 - Cache
+    webp/1.6.0@ysm/stable#2edb7a34db59c8cd32a24f568d9992ac:7dd2ca62642fcaffc30787bafde3925b75cd3e62#5dffffb323d5c50c65555fb2165af68a - Cache
+    yalantinglibs/0.6.1@ysm/stable#f7147a2a0bc76f5eff1e20d589278220:7dd2ca62642fcaffc30787bafde3925b75cd3e62#73259afa34ac9e313b4ab0c46d37e29f - Cache
+    yuv/0.0.1974@ysm/stable#c37fe87acd6aa988294bb20b9477f974:7dd2ca62642fcaffc30787bafde3925b75cd3e62#bb455d871906140f590390ccd6feea48 - Cache
+    zlib-ng/2.3.3@ysm/stable#05f18a7d8a7285b9d75a8975d0a823d5:7dd2ca62642fcaffc30787bafde3925b75cd3e62#1189bfea6d903585004007d2553d065a - Cache
+    zstd/1.5.7@ysm/stable#eaa8aead451a165b8c41058c130223f5:7dd2ca62642fcaffc30787bafde3925b75cd3e62#18d3750a62026079ecb35ace091e83e0 - Cache
+Test requirements
+    benchmark/1.10.0@ysm/stable#f36ae508b467db9acc0c1b156890508f:4bde21b7b8e2157a563faa947bf5a33eda7fb760#2944c0976b80e9f7c9a0ee5abb967d14 - Cache
+    googletest/1.18.0@ysm/stable#d142fdd8bc8e66980a865111c5a3ad62:556e602788c6336dfcc6133a66e7d8ad71c49a50#1665fed614bd7bc6a53949712ac52add - Cache
+    re2/2025-11-05@ysm/stable#a28dab621f464a93c427777a36011bbe:f765cb8d6a1472c6e64b61806c2670ff45e2c776#1734c91c62f953c2f97de655f92fe33c - Cache
+
+======== Installing packages ========
+benchmark/1.10.0@ysm/stable: Already installed! (1 of 31)
+blake3/1.8.7@ysm/stable: Already installed! (2 of 31)
+cglm/0.9.7@ysm/stable: Already installed! (3 of 31)
+cpu_features/0.11.0@ysm/stable: Already installed! (4 of 31)
+jni/8.0.0@ysm/stable: Already installed! (5 of 31)
+magic_enum/0.9.8@ysm/stable: Already installed! (6 of 31)
+mimalloc/3.6.0@ysm/stable: Already installed! (7 of 31)
+optional_ref/0.3.1@ysm/stable: Already installed! (8 of 31)
+proxy/4.1.0@ysm/stable: Already installed! (9 of 31)
+pystring/1.2.0@ysm/stable: Already installed! (10 of 31)
+abseil/20260817.0@ysm/stable: Already installed! (11 of 31)
+cryptopp/8.9.0@ysm/stable: Already installed! (12 of 31)
+dav1d/1.5.4@ysm/stable: Already installed! (13 of 31)
+lzma/26.02@ysm/stable: Already installed! (14 of 31)
+ogg/1.3.6@ysm/stable: Already installed! (15 of 31)
+opus/1.6.1@ysm/stable: Already installed! (16 of 31)
+speexdsp/1.2.1@ysm/stable: Already installed! (17 of 31)
+svt-av1/4.2.0@ysm/stable: Already installed! (18 of 31)
+tracy/0.14.1@ysm/stable: Already installed! (19 of 31)
+webp/1.6.0@ysm/stable: Already installed! (20 of 31)
+yalantinglibs/0.6.1@ysm/stable: Already installed! (21 of 31)
+yuv/0.0.1974@ysm/stable: Already installed! (22 of 31)
+zlib-ng/2.3.3@ysm/stable: Already installed! (23 of 31)
+zstd/1.5.7@ysm/stable: Already installed! (24 of 31)
+avif/1.4.2@ysm/stable: Already installed! (25 of 31)
+jpeg-turbo/3.2.0@ysm/stable: Already installed! (26 of 31)
+minizip-ng/4.2.2@ysm/stable: Already installed! (27 of 31)
+re2/2025-11-05@ysm/stable: Already installed! (28 of 31)
+spng/0.7.4@ysm/stable: Already installed! (29 of 31)
+vorbis/1.3.7@ysm/stable: Already installed! (30 of 31)
+googletest/1.18.0@ysm/stable: Already installed! (31 of 31)
+
+======== Finalizing install (deploy, generators) ========
+>>> Generate step for conanfile.py (ysm/3.0)
+Generators folder: D:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators
+Calling generate() method in recipe
+CMakeDeps necessary find_package() and targets for your CMakeLists.txt
+    find_package(minizip-ng)
+    find_package(zstd)
+    find_package(cglm)
+    find_package(lzma)
+    find_package(opus)
+    find_package(Vorbis)
+    find_package(Ogg)
+    find_package(SpeexDSP)
+    find_package(spng)
+    find_package(jpeg-turbo)
+    find_package(zlib-ng)
+    find_package(avif)
+    find_package(yuv)
+    find_package(webp)
+    find_package(blake3)
+    find_package(cryptopp)
+    find_package(cpu_features)
+    find_package(proxy)
+    find_package(pystring)
+    find_package(optional_ref)
+    find_package(magic_enum)
+    find_package(jni)
+    find_package(yalantinglibs)
+    find_package(Tracy)
+    find_package(absl)
+    find_package(mimalloc)
+    find_package(benchmark)
+    find_package(GTest)
+    target_link_libraries(... minizip libzstd_static cglm lzma opus Vorbis::vorbis Ogg::ogg SpeexDSP::resampler spng_static turbojpeg-static zlib-ng-static avif yuv webp blake3 cryptopp cpu_features msft_proxy4 pystring optional_ref magic_enum jni yalantinglibs Tracy::TracyClient abseil::abseil mimalloc-static benchmark GTest)
+WARN: Toolchain: Ignoring fPIC option defined for Windows
+CMakeToolchain generated: conan_toolchain.cmake
+CMakeToolchain: Preset 'native-release' added to CMakePresets.json.
+    (cmake>=3.23) cmake --preset native-release
+    (cmake<3.23) cmake <path> -G Ninja
+                 -DCMAKE_TOOLCHAIN_FILE=<output_folder>/generators\conan_toolchain.cmake 
+                 -DYSM_DEPENDENCY_PROVIDER=conan -DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang-cl -DCMAKE_CXX_COMPILER=clang-cl
+CMakeToolchain generated: D:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\CMakePresets.json
+CMakeToolchain generated: D:\a\YesSteveModel-Native\YesSteveModel-Native\CMakeUserPresets.json
+Generating aggregated env files
+Generated aggregated env files: ['conanbuild.bat', 'conanbuild.ps1', 'conanrun.bat', 'conanrun.ps1']
+
+======== Calling build() ========
+>>> Build step for conanfile.py (ysm/3.0)
+Calling build()
+Running CMake.configure()
+RUN: cmake -G "Ninja" -DCMAKE_TOOLCHAIN_FILE="generators/conan_toolchain.cmake" -DCMAKE_INSTALL_PREFIX="D:/a/YesSteveModel-Native/YesSteveModel-Native" -DYSM_DEPENDENCY_PROVIDER="conan" -DCMAKE_POLICY_DEFAULT_CMP0091="NEW" -DCMAKE_BUILD_TYPE="Release" -DCMAKE_C_COMPILER="clang-cl" -DCMAKE_CXX_COMPILER="clang-cl" "D:/a/YesSteveModel-Native/YesSteveModel-Native"
+conanvcvars.bat: Activating environment Visual Studio 17 - amd64 - winsdk_version=None - vcvars_ver=14.4
+[vcvarsall.bat] Environment initialized for: 'x64'
+-- Using Conan toolchain: D:/a/YesSteveModel-Native/YesSteveModel-Native/build/native-release/generators/conan_toolchain.cmake
+-- Conan toolchain: Including user_toolchain: D:/a/YesSteveModel-Native/YesSteveModel-Native/build/native-release/generators/../../../conan/cmake/pre-setup.cmake
+-- Conan toolchain: Setting CMAKE_MSVC_RUNTIME_LIBRARY=$<$<CONFIG:Release>:MultiThreaded>$<$<CONFIG:Debug>:MultiThreadedDebug>
+-- Conan toolchain: C++ Standard 23 with extensions OFF
+-- The CXX compiler identification is Clang 19.1.5 with MSVC-like command-line
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/Llvm/x64/bin/clang-cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Conan: Target declared 'mimalloc-static'
+-- Conan: Component target declared 'absl::config'
+-- Conan: Component target declared 'absl::pretty_function'
+-- Conan: Component target declared 'absl::civil_time'
+-- Conan: Component target declared 'absl::time_zone'
+-- Conan: Component target declared 'absl::bad_any_cast'
+-- Conan: Component target declared 'absl::bad_optional_access'
+-- Conan: Component target declared 'absl::bad_variant_access'
+-- Conan: Component target declared 'absl::errno_saver'
+-- Conan: Component target declared 'absl::nullability'
+-- Conan: Component target declared 'absl::dynamic_annotations'
+-- Conan: Component target declared 'absl::core_headers'
+-- Conan: Component target declared 'absl::fast_type_id'
+-- Conan: Component target declared 'absl::iterator_traits_test_helper_internal'
+-- Conan: Component target declared 'absl::hashtable_debug_hooks'
+-- Conan: Component target declared 'absl::node_slot_policy'
+-- Conan: Component target declared 'absl::raw_hash_set_resize_impl'
+-- Conan: Component target declared 'absl::non_temporal_arm_intrinsics'
+-- Conan: Component target declared 'absl::utf8_for_code_point'
+-- Conan: Component target declared 'absl::weakly_mixed_integer'
+-- Conan: Component target declared 'absl::constexpr_testing_internal'
+-- Conan: Component target declared 'absl::requires_internal'
+-- Conan: Component target declared 'absl::numeric_representation'
+-- Conan: Component target declared 'absl::random_internal_fast_uniform_bits'
+-- Conan: Component target declared 'absl::random_internal_platform'
+-- Conan: Component target declared 'absl::has_ostream_operator'
+-- Conan: Component target declared 'absl::cordz_update_tracker'
+-- Conan: Component target declared 'absl::atomic_hook'
+-- Conan: Component target declared 'absl::hardening'
+-- Conan: Component target declared 'absl::log_severity'
+-- Conan: Component target declared 'absl::no_destructor'
+-- Conan: Component target declared 'absl::nullability_traits_internal'
+-- Conan: Component target declared 'absl::strerror'
+-- Conan: Component target declared 'absl::prefetch'
+-- Conan: Component target declared 'absl::algorithm'
+-- Conan: Component target declared 'absl::hashtable_debug'
+-- Conan: Component target declared 'absl::non_temporal_memcpy'
+-- Conan: Component target declared 'absl::leak_check'
+-- Conan: Component target declared 'absl::flags_commandlineflag_internal'
+-- Conan: Component target declared 'absl::log_internal_config'
+-- Conan: Component target declared 'absl::log_internal_nullguard'
+-- Conan: Component target declared 'absl::log_internal_voidify'
+-- Conan: Component target declared 'absl::type_traits'
+-- Conan: Component target declared 'absl::exponential_biased'
+-- Conan: Component target declared 'absl::random_internal_randen_slow'
+-- Conan: Component target declared 'absl::random_internal_randen_hwaes_impl'
+-- Conan: Component target declared 'absl::string_view'
+-- Conan: Component target declared 'absl::source_location'
+-- Conan: Component target declared 'absl::raw_logging_internal'
+-- Conan: Component target declared 'absl::base_internal'
+-- Conan: Component target declared 'absl::iterator_traits_internal'
+-- Conan: Component target declared 'absl::container_common'
+-- Conan: Component target declared 'absl::meta'
+-- Conan: Component target declared 'absl::periodic_sampler'
+-- Conan: Component target declared 'absl::random_mocking_access'
+-- Conan: Component target declared 'absl::random_internal_randen_hwaes'
+-- Conan: Component target declared 'absl::charset'
+-- Conan: Component target declared 'absl::stringify_stream'
+-- Conan: Component target declared 'absl::compare'
+-- Conan: Component target declared 'absl::internal_optional_ref'
+-- Conan: Component target declared 'absl::utility'
+-- Conan: Component target declared 'absl::spinlock_wait'
+-- Conan: Component target declared 'absl::throw_delegate'
+-- Conan: Component target declared 'absl::scoped_set_env'
+-- Conan: Component target declared 'absl::algorithm_container'
+-- Conan: Component target declared 'absl::cleanup_internal'
+-- Conan: Component target declared 'absl::compressed_tuple'
+-- Conan: Component target declared 'absl::common_policy_traits'
+-- Conan: Component target declared 'absl::debugging_internal'
+-- Conan: Component target declared 'absl::overload'
+-- Conan: Component target declared 'absl::memory'
+-- Conan: Component target declared 'absl::random_seed_gen_exception'
+-- Conan: Component target declared 'absl::random_internal_distribution_caller'
+-- Conan: Component target declared 'absl::random_internal_randen'
+-- Conan: Component target declared 'absl::cordz_functions'
+-- Conan: Component target declared 'absl::any'
+-- Conan: Component target declared 'absl::optional'
+-- Conan: Component target declared 'absl::variant'
+-- Conan: Component target declared 'absl::base'
+-- Conan: Component target declared 'absl::cleanup'
+-- Conan: Component target declared 'absl::fixed_array'
+-- Conan: Component target declared 'absl::bind_back'
+-- Conan: Component target declared 'absl::bind_front'
+-- Conan: Component target declared 'absl::random_internal_mock_helpers'
+-- Conan: Component target declared 'absl::strings_resize_and_overwrite'
+-- Conan: Component target declared 'absl::any_span'
+-- Conan: Component target declared 'absl::span'
+-- Conan: Component target declared 'absl::base_cpu_detect'
+-- Conan: Component target declared 'absl::malloc_internal'
+-- Conan: Component target declared 'absl::endian'
+-- Conan: Component target declared 'absl::tracing_internal'
+-- Conan: Component target declared 'absl::inlined_vector_internal'
+-- Conan: Component target declared 'absl::any_invocable'
+-- Conan: Component target declared 'absl::log_internal_conditions'
+-- Conan: Component target declared 'absl::strings_append_and_overwrite'
+-- Conan: Component target declared 'absl::poison'
+-- Conan: Component target declared 'absl::inlined_vector'
+-- Conan: Component target declared 'absl::stacktrace'
+-- Conan: Component target declared 'absl::function_ref'
+-- Conan: Component target declared 'absl::bits'
+-- Conan: Component target declared 'absl::strings_internal'
+-- Conan: Component target declared 'absl::graphcycles_internal'
+-- Conan: Component target declared 'absl::hashtable_control_bytes'
+-- Conan: Component target declared 'absl::crc_internal'
+-- Conan: Component target declared 'absl::bounded_utf8_length_sequence'
+-- Conan: Component target declared 'absl::debugging'
+-- Conan: Component target declared 'absl::city'
+-- Conan: Component target declared 'absl::int128'
+-- Conan: Component target declared 'absl::random_internal_fastmath'
+-- Conan: Component target declared 'absl::decode_rust_punycode'
+-- Conan: Component target declared 'absl::numeric'
+-- Conan: Component target declared 'absl::random_internal_traits'
+-- Conan: Component target declared 'absl::random_internal_iostream_state_saver'
+-- Conan: Component target declared 'absl::random_internal_wide_multiply'
+-- Conan: Component target declared 'absl::strings'
+-- Conan: Component target declared 'absl::layout'
+-- Conan: Component target declared 'absl::demangle_rust'
+-- Conan: Component target declared 'absl::flags_path_util'
+-- Conan: Component target declared 'absl::flags_commandlineflag'
+-- Conan: Component target declared 'absl::hash'
+-- Conan: Component target declared 'absl::log_internal_proto'
+-- Conan: Component target declared 'absl::log_internal_nullstream'
+-- Conan: Component target declared 'absl::log_internal_append_truncated'
+-- Conan: Component target declared 'absl::log_internal_fnmatch'
+-- Conan: Component target declared 'absl::log_internal_container'
+-- Conan: Component target declared 'absl::random_bit_gen_ref'
+-- Conan: Component target declared 'absl::random_internal_seed_material'
+-- Conan: Component target declared 'absl::random_internal_generate_real'
+-- Conan: Component target declared 'absl::random_internal_pcg_engine'
+-- Conan: Component target declared 'absl::random_internal_randen_engine'
+-- Conan: Component target declared 'absl::random_internal_uniform_helper'
+-- Conan: Component target declared 'absl::str_format_internal'
+-- Conan: Component target declared 'absl::time'
+-- Conan: Component target declared 'absl::container_memory'
+-- Conan: Component target declared 'absl::chunked_queue'
+-- Conan: Component target declared 'absl::demangle_internal'
+-- Conan: Component target declared 'absl::flags_private_handle_accessor'
+-- Conan: Component target declared 'absl::log_internal_globals'
+-- Conan: Component target declared 'absl::log_entry'
+-- Conan: Component target declared 'absl::log_internal_structured_proto'
+-- Conan: Component target declared 'absl::random_distributions'
+-- Conan: Component target declared 'absl::random_internal_salted_seed_seq'
+-- Conan: Component target declared 'absl::str_format'
+-- Conan: Component target declared 'absl::kernel_timeout_internal'
+-- Conan: Component target declared 'absl::hash_policy_traits'
+-- Conan: Component target declared 'absl::crc32c'
+-- Conan: Component target declared 'absl::symbolize'
+-- Conan: Component target declared 'absl::flags_marshalling'
+-- Conan: Component target declared 'absl::log_internal_format'
+-- Conan: Component target declared 'absl::log_sink'
+-- Conan: Component target declared 'absl::random_internal_distribution_test_util'
+-- Conan: Component target declared 'absl::generic_printer_internal'
+-- Conan: Component target declared 'absl::crc_cord_state'
+-- Conan: Component target declared 'absl::examine_stack'
+-- Conan: Component target declared 'absl::synchronization'
+-- Conan: Component target declared 'absl::failure_signal_handler'
+-- Conan: Component target declared 'absl::flags_program_name'
+-- Conan: Component target declared 'absl::vlog_config_internal'
+-- Conan: Component target declared 'absl::sample_recorder'
+-- Conan: Component target declared 'absl::random_internal_entropy_pool'
+-- Conan: Component target declared 'absl::cord_internal'
+-- Conan: Component target declared 'absl::cordz_statistics'
+-- Conan: Component target declared 'absl::cordz_handle'
+-- Conan: Component target declared 'absl::clock_interface'
+-- Conan: Component target declared 'absl::hashtablez_sampler'
+-- Conan: Component target declared 'absl::flags_config'
+-- Conan: Component target declared 'absl::log_globals'
+-- Conan: Component target declared 'absl::absl_vlog_is_on'
+-- Conan: Component target declared 'absl::random_seed_sequences'
+-- Conan: Component target declared 'absl::random_internal_nonsecure_base'
+-- Conan: Component target declared 'absl::cordz_info'
+-- Conan: Component target declared 'absl::flags_internal'
+-- Conan: Component target declared 'absl::log_internal_log_sink_set'
+-- Conan: Component target declared 'absl::log_initialize'
+-- Conan: Component target declared 'absl::vlog_is_on'
+-- Conan: Component target declared 'absl::random_random'
+-- Conan: Component target declared 'absl::cordz_sample_token'
+-- Conan: Component target declared 'absl::cordz_update_scope'
+-- Conan: Component target declared 'absl::log_sink_registry'
+-- Conan: Component target declared 'absl::cord'
+-- Conan: Component target declared 'absl::btree'
+-- Conan: Component target declared 'absl::hash_function_defaults'
+-- Conan: Component target declared 'absl::log_internal_message'
+-- Conan: Component target declared 'absl::status'
+-- Conan: Component target declared 'absl::hash_container_defaults'
+-- Conan: Component target declared 'absl::raw_hash_set'
+-- Conan: Component target declared 'absl::log_internal_strip'
+-- Conan: Component target declared 'absl::log_internal_structured'
+-- Conan: Component target declared 'absl::statusor'
+-- Conan: Component target declared 'absl::status_builder'
+-- Conan: Component target declared 'absl::flat_hash_set'
+-- Conan: Component target declared 'absl::node_hash_set'
+-- Conan: Component target declared 'absl::raw_hash_map'
+-- Conan: Component target declared 'absl::log_internal_check_op'
+-- Conan: Component target declared 'absl::log_internal_log_impl'
+-- Conan: Component target declared 'absl::log_structured'
+-- Conan: Component target declared 'absl::status_macros'
+-- Conan: Component target declared 'absl::flat_hash_map'
+-- Conan: Component target declared 'absl::node_hash_map'
+-- Conan: Component target declared 'absl::linked_hash_set'
+-- Conan: Component target declared 'absl::linked_hash_map'
+-- Conan: Component target declared 'absl::log_internal_check_impl'
+-- Conan: Component target declared 'absl::absl_log'
+-- Conan: Component target declared 'absl::log'
+-- Conan: Component target declared 'absl::flags_reflection'
+-- Conan: Component target declared 'absl::absl_check'
+-- Conan: Component target declared 'absl::check'
+-- Conan: Component target declared 'absl::die_if_null'
+-- Conan: Component target declared 'absl::log_streamer'
+-- Conan: Component target declared 'absl::profile_builder'
+-- Conan: Component target declared 'absl::flags'
+-- Conan: Component target declared 'absl::hashtable_profiler'
+-- Conan: Component target declared 'absl::flags_usage_internal'
+-- Conan: Component target declared 'absl::log_internal_flags'
+-- Conan: Component target declared 'absl::flags_usage'
+-- Conan: Component target declared 'absl::log_flags'
+-- Conan: Component target declared 'absl::flags_parse'
+-- Conan: Target declared 'abseil::abseil'
+-- Conan: Target declared 'zlib-ng-static'
+-- Conan: Target declared 'minizip'
+-- Conan: Target declared 'libzstd_static'
+-- Conan: Target declared 'lzma'
+-- Conan: Target declared 'opus'
+-- Conan: Target declared 'Ogg::ogg'
+-- Conan: Target declared 'Vorbis::vorbis'
+-- Conan: Target declared 'SpeexDSP::resampler'
+-- Conan: Target declared 'cglm'
+-- Conan: Target declared 'spng_static'
+-- Conan: Target declared 'turbojpeg-static'
+-- Conan: Component target declared 'sharpyuv'
+-- Conan: Component target declared 'webp'
+-- Conan: Target declared 'yuv'
+-- Conan: Target declared 'avif'
+-- Conan: Target declared 'dav1d'
+-- Conan: Target declared 'SvtAv1Enc'
+-- Conan: Target declared 'blake3'
+-- Conan: Target declared 'cryptopp'
+-- Conan: Target declared 'cpu_features'
+-- Conan: Target declared 'msft_proxy4'
+-- Conan: Target declared 'pystring'
+-- Conan: Target declared 'optional_ref'
+-- Conan: Target declared 'magic_enum'
+-- Conan: Target declared 'jni'
+-- Conan: Target declared 'yalantinglibs'
+-- Conan: Component target declared 're2::re2'
+-- Conan: Target declared 're2'
+-- Conan: Component target declared 'GTest::gtest'
+-- Conan: Component target declared 'GTest::gtest_main'
+-- Conan: Target declared 'GTest'
+-- Configuring done (1.9s)
+-- Generating done (0.3s)
+-- Build files have been written to: D:/a/YesSteveModel-Native/YesSteveModel-Native/build/native-release
+
+Running CMake.build()
+RUN: cmake --build "D:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release" --target ysm-lib-jni -- -j4
+conanvcvars.bat: Activating environment Visual Studio 17 - amd64 - winsdk_version=None - vcvars_ver=14.4
+[vcvarsall.bat] Environment initialized for: 'x64'
+[0/2] Re-checking globbed directories...
+[1/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\core\src\allocator.cc for CXX dependencies
+[2/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\core\src\buffer_managed.cc for CXX dependencies
+[3/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\core\src\cpu.cc for CXX dependencies
+[4/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\core\src\cpu_topology.cc for CXX dependencies
+[5/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\core\src\fs.cc for CXX dependencies
+[6/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\core\src\log.cc for CXX dependencies
+[7/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\core\src\profile.cc for CXX dependencies
+[8/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\core\src\device_quality.cc for CXX dependencies
+[9/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\core\src\system_allocator.cc for CXX dependencies
+[10/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\7z.cc for CXX dependencies
+[11/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\core\src\string_cvt.cc for CXX dependencies
+[12/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\core\src\thread_scheduling.cc for CXX dependencies
+[13/164] Generating CXX dyndep file modules\core\CMakeFiles\ysm-core.dir\CXX.dd
+[14/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\7z\file_stream.cc for CXX dependencies
+[15/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\7z\mem_stream.cc for CXX dependencies
+[16/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\audio.cc for CXX dependencies
+[17/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\base64.cc for CXX dependencies
+[18/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\blake3.cc for CXX dependencies
+[19/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\hex.cc for CXX dependencies
+[20/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\image.cc for CXX dependencies
+[21/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\image\avif.cc for CXX dependencies
+[22/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\image\jpeg.cc for CXX dependencies
+[23/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\image\webp.cc for CXX dependencies
+[24/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\image\png.cc for CXX dependencies
+[25/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\image\ztx.cc for CXX dependencies
+[26/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\java_random.cc for CXX dependencies
+[27/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\mini_ogg.cc for CXX dependencies
+[28/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\ogg_muxer.cc for CXX dependencies
+[29/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\opus.cc for CXX dependencies
+[30/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\zip.cc for CXX dependencies
+[31/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\zstd.cc for CXX dependencies
+[32/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\zlib.cc for CXX dependencies
+[33/164] Building CXX object modules\core\CMakeFiles\ysm-core.dir\src\allocator.cc.obj
+[34/164] Building CXX object modules\core\CMakeFiles\ysm-core.dir\src\buffer_managed.cc.obj
+[35/164] Building CXX object modules\core\CMakeFiles\ysm-core.dir\src\cpu.cc.obj
+[36/164] Building CXX object modules\core\CMakeFiles\ysm-core.dir\src\cpu_topology.cc.obj
+[37/164] Building CXX object modules\core\CMakeFiles\ysm-core.dir\src\device_quality.cc.obj
+[38/164] Building CXX object modules\core\CMakeFiles\ysm-core.dir\src\profile.cc.obj
+[39/164] Building CXX object modules\core\CMakeFiles\ysm-core.dir\src\fs.cc.obj
+[40/164] Building CXX object modules\core\CMakeFiles\ysm-core.dir\src\system_allocator.cc.obj
+[41/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\gfx\src\bake\baked_model.cc for CXX dependencies
+[42/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\gfx\src\bake\baked_serializer.cc for CXX dependencies
+[43/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\gfx\src\math\pose_stack.cc for CXX dependencies
+[44/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\gfx\src\renderer\model_state.cc for CXX dependencies
+[45/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\gfx\src\renderer\parallel_executor.cc for CXX dependencies
+[46/164] Building CXX object modules\core\CMakeFiles\ysm-core.dir\src\thread_scheduling.cc.obj
+[47/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\gfx\src\renderer\render.cc for CXX dependencies
+[48/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\gfx\src\renderer\render_state.cc for CXX dependencies
+[49/164] Generating CXX dyndep file modules\codec\CMakeFiles\ysm-codec.dir\CXX.dd
+[50/164] Building CXX object modules\core\CMakeFiles\ysm-core.dir\src\log.cc.obj
+[51/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\gfx\src\renderer\schedule.cc for CXX dependencies
+[52/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\java\src\class.cc for CXX dependencies
+[53/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\java\src\entry.cc for CXX dependencies
+[54/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\java\src\string.cc for CXX dependencies
+[55/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\legacy\src\bundle.cc for CXX dependencies
+[56/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\legacy\src\v3.cc for CXX dependencies
+[57/164] Building CXX object modules\core\CMakeFiles\ysm-core.dir\src\string_cvt.cc.obj
+[58/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\legacy\src\v3\codec\chacha.cc for CXX dependencies
+[59/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\legacy\src\v3\codec\chacha_avx.cc for CXX dependencies
+[60/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\legacy\src\v3\codec\chacha_simd.cc for CXX dependencies
+[61/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\legacy\src\v3\codec\deobfuscator.cc for CXX dependencies
+[62/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\legacy\src\v3\codec\dirty_zstd.cc for CXX dependencies
+[63/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\legacy\src\v3\codec\envelope.cc for CXX dependencies
+[64/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\legacy\src\v3\codec\modified_city_hash.cc for CXX dependencies
+[65/164] Linking CXX static library modules\core\ysm-core.lib
+[66/164] Generating CXX dyndep file modules\gfx\CMakeFiles\ysm-gfx.dir\CXX.dd
+[67/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\legacy\src\v3\container\decoder.cc for CXX dependencies
+[68/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\legacy\src\v3\container\image.cc for CXX dependencies
+[69/164] Scanning D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\legacy\src\v3\conversion\projector.cc for CXX dependencies
+[70/164] Building CXX object modules\codec\CMakeFiles\ysm-codec.dir\src\codec\7z\mem_stream.cc.obj
+[71/164] Building CXX object modules\codec\CMakeFiles\ysm-codec.dir\src\codec\7z\file_stream.cc.obj
+[72/164] Building CXX object modules\codec\CMakeFiles\ysm-codec.dir\src\codec\7z.cc.obj
+[73/164] Building CXX object modules\codec\CMakeFiles\ysm-codec.dir\src\codec\audio.cc.obj
+[74/164] Building CXX object modules\codec\CMakeFiles\ysm-codec.dir\src\codec\blake3.cc.obj
+[75/164] Building CXX object modules\codec\CMakeFiles\ysm-codec.dir\src\codec\base64.cc.obj
+[76/164] Building CXX object modules\codec\CMakeFiles\ysm-codec.dir\src\codec\hex.cc.obj
+[77/164] Building CXX object modules\codec\CMakeFiles\ysm-codec.dir\src\codec\image.cc.obj
+FAILED: [code=1] modules/codec/CMakeFiles/ysm-codec.dir/src/codec/image.cc.obj 
+"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\Llvm\x64\bin\clang-cl.exe"  /nologo -TP -DABSL_MAX_VLOG_VERBOSITY=0 -DOUTSIDE_SPEEX -DRANDOM_PREFIX=ysm_speex -DWINVER=0x0601 -DYSM_ENABLE_DEBUG_LOG=0 -DYSM_TARGET=\"windows-x64\" -DYSM_WINDOWS=1 -DYSM_X64=1 -D_AMD64_ -D_CRT_SECURE_NO_WARNINGS -D_SILENCE_CXX20_U8PATH_DEPRECATION_WARNING -D_WIN32_WINNT=0x0601 -ID:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\include -ID:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src -ID:\a\YesSteveModel-Native\YesSteveModel-Native\modules\core\src -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\mimalfdf922402d40e\p\include\mimalloc-3.6 -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\optio9d1b19fe6fd15\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\magic77fcd5f9e6ab0\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\cpu_fd75cc5d92a990\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\absei0188ebe2a5d48\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\proxyd56e18fe8f6aa\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\miniz905be0bd019a1\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\miniz905be0bd019a1\p\include\minizip -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\zlib-1027f3cc7e3c9\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\lzmabefb7971f5814\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\zstda8716b7f50af3\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\yuvd85c9b73506a3\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\aviff7cbf092d85b8\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\webp0678823f26526\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\webp0678823f26526\p\include\webp -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\jpeg-e990394ed6504\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\spngdeb3a768a7f57\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\opus98d3f0a59decd\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\opus98d3f0a59decd\p\include\opus -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\ogg043b6e1c7f4c3\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\vorbie15a205e00584\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\speex3388f36913dc8\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\blake790eea6c39825\p\include -imsvcD:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\crypt56365f694794d\p\include -fuse-ld=lld  /DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -clang:-std=c++23 -MT /clang:-Wno-deprecated-declarations /clang:-Wno-deprecated-this-capture /clang:-Wno-unused-function /clang:-Wno-unused-parameter /clang:-Wno-unused-variable /utf-8 /permissive- /volatile:iso /clang:-march=x86-64 /EHsc /Gw /clang:-O3 /clang:-fomit-frame-pointer /clang:-flto=thin -clang:-MD -clang:-MTmodules\codec\CMakeFiles\ysm-codec.dir\src\codec\image.cc.obj -clang:-MFmodules\codec\CMakeFiles\ysm-codec.dir\src\codec\image.cc.obj.d @modules\codec\CMakeFiles\ysm-codec.dir\src\codec\image.cc.obj.modmap /Fomodules\codec\CMakeFiles\ysm-codec.dir\src\codec\image.cc.obj /Fdmodules\codec\CMakeFiles\ysm-codec.dir\ysm-codec.pdb -c -- D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\image.cc
+In file included from D:\a\YesSteveModel-Native\YesSteveModel-Native\modules\codec\src\codec\image.cc:3:
+In file included from D:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\proxyd56e18fe8f6aa\p\include\proxy/proxy.h:8:
+In file included from D:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\proxyd56e18fe8f6aa\p\include\proxy\v4/proxy.h:8:
+D:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\proxyd56e18fe8f6aa\p\include\proxy\v4\detail/compatibility_check.h(23,15): error: static assertion failed due to requirement 'sizeof(pro::detail::compatibility_check::derived) == sizeof(char)': [[msvc::no_unique_address]] is broken
+   23 | static_assert(sizeof(derived) == sizeof(char),
+      |               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\a\YesSteveModel-Native\YesSteveModel-Native\build\native-release\generators\..\..\..\conan\cache\p\b\proxyd56e18fe8f6aa\p\include\proxy\v4\detail/compatibility_check.h(23,31): note: expression evaluates to '2 == 1'
+   23 | static_assert(sizeof(derived) == sizeof(char),
+      |               ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+1 error generated.
+[78/164] Building CXX object modules\codec\CMakeFiles\ysm-codec.dir\src\codec\image\jpeg.cc.obj
+[79/164] Building CXX object modules\codec\CMakeFiles\ysm-codec.dir\src\codec\image\avif.cc.obj
+[80/164] Building CXX object modules\codec\CMakeFiles\ysm-codec.dir\src\codec\image\png.cc.obj
+ninja: build stopped: subcommand failed.
+
+ERROR: conanfile.py (ysm/3.0): Error in build() method, line 79
+	cmake.build(target="ysm-lib-jni")
+	ConanException: Error 1 while executing
